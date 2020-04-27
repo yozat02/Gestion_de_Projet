@@ -1,0 +1,23 @@
+{
+  "name": "isc-dashboard-v2",
+  "version": "1.0.0",
+  "description": "1. Follow instructions on Docker Section to set up the environment.\r 2. Follow instructions on Server Section to set up the server.\r 3. Follow instructions on Client Section to set up the client.\r 4. Run dev script from root directory with npm to launch server and client at same time :",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "npm run start --prefix client",
+    "server": "nodemon index.js --prefix server",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.rabat.sqli.com/isc-dashboard-v2/isc-dashboard-v2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
+  }
+}
