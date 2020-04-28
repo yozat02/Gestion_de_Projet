@@ -16,4 +16,4 @@ services:
 
 volumes:
   docker-data:
-    name: isc-dashboard-mongoDB-data
+    name: pfa

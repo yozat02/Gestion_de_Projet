@@ -22,9 +22,8 @@ export default function TreeTable({ tableData } = []) {
 
     const [{ columns }] = useState({
         columns: [
-            { title: 'Name', field: 'name' },
-            { title: 'Last Comment', field: 'description' },
-            { title: 'Metrics', field: 'description' }
+            { title: 'Nom', field: 'name' },
+            { title: 'Description', field: 'description' },
         ]
     });
 
@@ -57,7 +56,6 @@ export default function TreeTable({ tableData } = []) {
             icons={tableIcons}
             data={tableData}
             columns={columns}
-            parentChildData={(row, rows) => rows.find(a => a._id === row.parent)}
         />
     );
 }

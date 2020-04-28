@@ -43,23 +43,6 @@ const AppMenu = withRouter(({ location: { pathname }, open }) => {
                     <ListItemText primary="Dashboard" />
                 </ListItem>
 
-
-                <ListItem button component={NavLink} to="/actions" selected={'/actions' === pathname}>
-                    <ListItemIcon>
-                        <BuildIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Actions" />
-                </ListItem>
-
-                <ListItem button component={NavLink} to="/manageProjects" selected={'/manageProjects' === pathname}>
-                    <ListItemIcon>
-                        <AccountTreeIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Manage Projects" />
-                </ListItem>
-
-
-
                 {/* CHECKUPS */}
                 <ListItem button onClick={() => setOpenCheckups(!openCheckups)}>
                     <ListItemIcon>
@@ -70,29 +53,11 @@ const AppMenu = withRouter(({ location: { pathname }, open }) => {
                 </ListItem>
                 <Collapse in={openCheckups} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
-                        <ListItem button className={open && classes.nested} component={NavLink} to="/checkup/portfolio" selected={'/checkup/portfolio' === pathname}>
-                            <ListItemIcon>
-                                <ArrowRightIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Portfolio" />
-                        </ListItem>
-                        <ListItem button className={open && classes.nested} component={NavLink} to="/checkup/program" selected={'/checkup/program' === pathname}>
-                            <ListItemIcon>
-                                <ArrowRightIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Program" />
-                        </ListItem>
                         <ListItem button className={open && classes.nested} component={NavLink} to="/checkup/project" selected={'/checkup/project' === pathname}>
                             <ListItemIcon>
                                 <ArrowRightIcon />
                             </ListItemIcon>
                             <ListItemText primary="Project" />
-                        </ListItem>
-                        <ListItem button className={open && classes.nested} component={NavLink} to="/checkup/devOps" selected={'/checkup/devOps' === pathname}>
-                            <ListItemIcon>
-                                <ArrowRightIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="DevOps" />
                         </ListItem>
                     </List>
                 </Collapse>
