@@ -1,4 +1,3 @@
-# ISC DASHBOARD V2
 
 1. Follow instructions on Docker Section to set up the environment.
 2. Follow instructions on Server Section to set up the server.
