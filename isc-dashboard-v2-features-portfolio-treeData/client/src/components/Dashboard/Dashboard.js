@@ -17,7 +17,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import AppMenu from "../AppMenu/AppMenu";
-import Home from "../Home/Home";
+import {Home} from "../Home/Home";
 import Copyright from "../Copyright/Copyright"
 import CheckupsProjectPage from '../Pages/Projets'
 import CheckupsTachesPage from '../Pages/Taches';
@@ -105,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Dashboard = withRouter(({ location: { pathname } }) => {
+export const Dashboard = withRouter(({ location: { pathname } }) => {
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(true);
@@ -116,7 +116,7 @@ const Dashboard = withRouter(({ location: { pathname } }) => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-
+    
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -163,11 +163,13 @@ const Dashboard = withRouter(({ location: { pathname } }) => {
                 <div className={classes.appBarSpacer} />
                 <Container maxWidth="lg" className={classes.container}>
                     <Grid container spacing={3}>
+                    <React.Suspense  fallback={<div>Loading...</div>} >
                         <Switch>
                             <Route path="/" exact component={Home} />
                             <Route path="/checkup/Projet/:id" exact component={CheckupsProjectPage} />
                             <Route path="/checkup/Tache/:id" exact component={CheckupsTachesPage} />
                         </Switch>
+                    </React.Suspense >
                     </Grid>
                     <Box pt={4}>
                         <Copyright />
@@ -180,4 +182,3 @@ const Dashboard = withRouter(({ location: { pathname } }) => {
     );
 })
 
-export default Dashboard;

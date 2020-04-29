@@ -1,9 +1,11 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-import TreeTable from '../TreeTable/TreeTable';
+import {TreeTable} from '../TreeTable/TreeTable';
+import { useMutation } from '@apollo/react-hooks';
 
-const PROJETS = gql`
+
+export const PROJETS = gql`
  {
   projets{
     _id
@@ -12,21 +14,37 @@ const PROJETS = gql`
   }
 }
 `;
+const ADD_PROJET = gql`
+  mutation createProjet($input: ProjetInput) {
+    createProjet(input: $input) {
+      name
+      description
+    }
+  }
+`;
 
-const PortfolioTable = () => {
 
+export const PortfolioTable = () => {
+  
+  
 let { loading, error, data } = useQuery(PROJETS);
+const [addProjet] = useMutation(ADD_PROJET);
+  const addItem = (name,description) => {
+    addProjet({
+      variables: {
+          input: {"name": name ,"description" :description },
+      }
+  });
+  }
+
   
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
     console.log(data)
     return (
-        <>
-          
-            <TreeTable tableData={data.projets} title={'Liste des projets'} />
-        </>
+       <TreeTable tableData={data.projets} title={'Liste des projets'} addItem={addItem} />
     );
 }
 
-export default PortfolioTable;
+

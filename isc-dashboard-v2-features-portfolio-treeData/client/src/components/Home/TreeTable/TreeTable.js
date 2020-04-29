@@ -16,17 +16,27 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom'
 
-export default function TreeTable({ tableData,title } = []) {
+export const  TreeTable = ({ tableData,title,addItem } = []) => {
 
 
-    const [{ columns }] = useState({
+    const [state, setState] = React.useState({
         columns: [
             { title: 'Nom', field: 'name' },
             { title: 'Description', field: 'description' },
-        ]
-    });
+        ],
+        data: tableData
+      });
+
+      React.useEffect(() => {
+        const ac = new AbortController();
+        Promise.all([
+         
+        ])
+        return () => ac.abort(); // Abort both fetches on unmount
+      }, []);
+
 
     const history = useHistory();
     function handleClick(type,id) {
@@ -60,9 +70,32 @@ export default function TreeTable({ tableData,title } = []) {
         <MaterialTable
             title={title}
             icons={tableIcons}
-            data={tableData}
-            columns={columns}
-            onRowClick={(event, rowData) => {handleClick(rowData.__typename,rowData._id)} }
+            data={state.data}
+            columns={state.columns}
+            onRowClick={(event, rowData) => {handleClick(rowData.__typename,rowData._id)}}
+            editable={{
+                onRowAdd: newData => {
+                    //addItem(newData.name,newData.description)
+                    new Promise((resolve) => {
+                        setTimeout(() => {
+                          resolve();
+                          setState((prevState) => {
+                            const data = [...prevState.data];
+                            data.push({
+                              'name' : newData.name,
+                              'description' : newData.description,
+                            });
+                            return { ...prevState, data };
+                          });
+                        }, 600);
+                      })
+                }
+          
+            }}
+            options={{
+                actionsColumnIndex: -1,
+                paging: false,
+              }}
         />
     );
 }

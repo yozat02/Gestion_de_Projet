@@ -1,6 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TreeTable from "../Home/TreeTable/TreeTable";
+import {TreeTable} from "../Home/TreeTable/TreeTable";
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
