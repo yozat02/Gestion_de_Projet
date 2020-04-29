@@ -18,7 +18,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useHistory } from 'react-router-dom';
 
-export default function TreeTable({ tableData } = []) {
+export default function TreeTable({ tableData,title } = []) {
 
 
     const [{ columns }] = useState({
@@ -58,7 +58,7 @@ export default function TreeTable({ tableData } = []) {
     return (
 
         <MaterialTable
-            title={"Liste Projets"}
+            title={title}
             icons={tableIcons}
             data={tableData}
             columns={columns}

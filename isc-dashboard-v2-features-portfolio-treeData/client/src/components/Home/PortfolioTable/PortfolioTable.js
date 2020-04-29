@@ -24,7 +24,7 @@ let { loading, error, data } = useQuery(PROJETS);
     return (
         <>
           
-            <TreeTable tableData={data.projets} />
+            <TreeTable tableData={data.projets} title={'Liste des projets'} />
         </>
     );
 }

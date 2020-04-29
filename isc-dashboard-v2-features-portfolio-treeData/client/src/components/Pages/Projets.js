@@ -1,14 +1,8 @@
 import React from "react";
-
-//import { MainLayout } from "../../../Layouts";
-
 import { makeStyles } from "@material-ui/core/styles";
-
 import TreeTable from "../Home/TreeTable/TreeTable";
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-
-
 
 const TACHES = gql`
 query taches($portfolioId: ID!) {
@@ -27,19 +21,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CheckupsProjetsPage = ({match}) => {
-  const classes = useStyles();
-  console.log("match",match.params.id)
- 
+  const classes = useStyles(); 
   let { loading, error, data } = useQuery(TACHES,{ variables: {portfolioId: match.params.id},});
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-  
+
+  if (error || data.taches==null) return <p>Error :(</p>;
 
   return (
     
       <div className={classes.allWidth}>
-        <TreeTable title={"Taches"} tableData={data.taches} />
+        <TreeTable title={"Liste des taches"} tableData={data.taches} />
       </div>
     
   );

@@ -48,7 +48,7 @@ const AppMenu = withRouter(({ location: { pathname }, open }) => {
                     <ListItemIcon>
                         <VerifiedUserIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Checkups" />
+                    <ListItemText primary="Pages" />
                     {openCheckups ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
                 <Collapse in={openCheckups} timeout="auto" unmountOnExit>
@@ -58,31 +58,6 @@ const AppMenu = withRouter(({ location: { pathname }, open }) => {
                                 <ArrowRightIcon />
                             </ListItemIcon>
                             <ListItemText primary="Project" />
-                        </ListItem>
-                    </List>
-                </Collapse>
-
-                {/* REPORTING */}
-                <ListItem button onClick={() => setOpenReporting(!openReporting)}>
-                    <ListItemIcon>
-                        <TimelineIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Reporting" />
-                    {openReporting ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={openReporting} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItem button className={open && classes.nested} component={NavLink} to="/reporting/projects" selected={'/reporting/projects' === pathname}>
-                            <ListItemIcon>
-                                <ArrowRightIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Projects" />
-                        </ListItem>
-                        <ListItem button className={open && classes.nested} component={NavLink} to="/reporting/technical" selected={'/reporting/technical' === pathname}>
-                            <ListItemIcon>
-                                <ArrowRightIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Technical" />
                         </ListItem>
                     </List>
                 </Collapse>
