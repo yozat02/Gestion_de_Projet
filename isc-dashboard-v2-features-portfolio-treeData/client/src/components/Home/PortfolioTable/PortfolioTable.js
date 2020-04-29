@@ -33,6 +33,7 @@ const [addProjet] = useMutation(ADD_PROJET);
     addProjet({
       variables: {
           input: {"name": name ,"description" :description },
+          refetchQueries: [{ query: PROJETS }],
       }
   });
   }

@@ -26,17 +26,8 @@ export const  TreeTable = ({ tableData,title,addItem } = []) => {
             { title: 'Nom', field: 'name' },
             { title: 'Description', field: 'description' },
         ],
-        data: tableData
+        data : tableData
       });
-
-      React.useEffect(() => {
-        const ac = new AbortController();
-        Promise.all([
-         
-        ])
-        return () => ac.abort(); // Abort both fetches on unmount
-      }, []);
-
 
     const history = useHistory();
     function handleClick(type,id) {
@@ -71,27 +62,22 @@ export const  TreeTable = ({ tableData,title,addItem } = []) => {
             title={title}
             icons={tableIcons}
             data={state.data}
+            editable={{
+              onRowAdd: (newData) =>
+              new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve();
+                  addItem(newData.name,newData.description)
+                  setState((prevState) => {
+                    const data = [...prevState.data];
+                    data.push(newData);
+                    return { ...prevState, data };
+                  });
+                }, 600);
+              }),
+          }}
             columns={state.columns}
             onRowClick={(event, rowData) => {handleClick(rowData.__typename,rowData._id)}}
-            editable={{
-                onRowAdd: newData => {
-                    //addItem(newData.name,newData.description)
-                    new Promise((resolve) => {
-                        setTimeout(() => {
-                          resolve();
-                          setState((prevState) => {
-                            const data = [...prevState.data];
-                            data.push({
-                              'name' : newData.name,
-                              'description' : newData.description,
-                            });
-                            return { ...prevState, data };
-                          });
-                        }, 600);
-                      })
-                }
-          
-            }}
             options={{
                 actionsColumnIndex: -1,
                 paging: false,
