@@ -7,9 +7,9 @@ const developpeursResolvers = {
 
         developpeurs: async () => await Developpeur.find(),
 
-        // developpeur: async (parent, { developpeurId }) => {
-        //     return await Developpeur.findById(developpeurId);
-        // }
+        developpeur: async (parent, { developpeurId }) => {
+          return await Developpeur.findById(developpeurId);
+         }
     },
     // Mutation: {
     //     createDeveloppeur: async (root, { input }) => {

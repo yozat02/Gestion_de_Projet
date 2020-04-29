@@ -13,7 +13,7 @@ const query = gql`
         
         # Developpeurs
         developpeurs: [Developpeur]
-      #  developpeur(developpeurId: String!): Developpeur
+      developpeur(developpeurId: String!): Developpeur
     } 
 `;
 
