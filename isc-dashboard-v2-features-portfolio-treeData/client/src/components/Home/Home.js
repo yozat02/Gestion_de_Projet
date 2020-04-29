@@ -26,21 +26,6 @@ const Home = () => {
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     return (
         <>
-            <Grid item xs={12} md={4} lg={4}>
-                <Paper className={fixedHeightPaper}>
-                    <Block>My open actions</Block>
-                </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={4}>
-                <Paper className={fixedHeightPaper}>
-                    <Block>Stats</Block>
-                </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={4}>
-                <Paper className={fixedHeightPaper}>
-                    <Block>Important messages</Block>
-                </Paper>
-            </Grid>
             <Grid item xs={12}>
                 <PortfolioTable />
             </Grid>

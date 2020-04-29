@@ -6,6 +6,7 @@ import TreeTable from '../TreeTable/TreeTable';
 const PROJETS = gql`
  {
   projets{
+    _id
     name
     description
   }

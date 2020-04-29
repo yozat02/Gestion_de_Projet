@@ -19,6 +19,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import AppMenu from "../AppMenu/AppMenu";
 import Home from "../Home/Home";
 import Copyright from "../Copyright/Copyright"
+import CheckupsProjectPage from '../Pages/Projets'
 
 
 const drawerWidth = 240;
@@ -163,6 +164,7 @@ const Dashboard = withRouter(({ location: { pathname } }) => {
                     <Grid container spacing={3}>
                         <Switch>
                             <Route path="/" exact component={Home} />
+                            <Route path="/checkup/Projet/:id" exact component={CheckupsProjectPage} />
                         </Switch>
                     </Grid>
                     <Box pt={4}>

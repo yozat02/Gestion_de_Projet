@@ -16,6 +16,7 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
+import { useHistory } from 'react-router-dom';
 
 export default function TreeTable({ tableData } = []) {
 
@@ -27,6 +28,11 @@ export default function TreeTable({ tableData } = []) {
         ]
     });
 
+    const history = useHistory();
+    function handleClick(type,id) {
+     history.push(`/checkup/`+type+`/${id}`);
+   }
+ 
 
     const tableIcons = {
         Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -52,10 +58,11 @@ export default function TreeTable({ tableData } = []) {
     return (
 
         <MaterialTable
-            title={"Portfolios"}
+            title={"Liste Projets"}
             icons={tableIcons}
             data={tableData}
             columns={columns}
+            onRowClick={(event, rowData) => {handleClick(rowData.__typename,rowData._id)} }
         />
     );
 }
