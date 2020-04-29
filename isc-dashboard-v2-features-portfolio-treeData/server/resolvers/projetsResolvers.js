@@ -4,7 +4,7 @@ const projetsResolvers = {
 
     Query: {
         projets: () => Projet.find(),
-       // projet: async (root, { projetId }) => await Projet.findById(projetId)
+        projet: async (root, { projetId }) => await Projet.findById(projetId),
 
     },
     Mutation: {

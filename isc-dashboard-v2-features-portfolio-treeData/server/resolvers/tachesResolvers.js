@@ -5,19 +5,19 @@ const tachesResolvers = {
     Query: {
         taches: async (parent, { projetId }) => {
             // //Get taches by projetId
-            // if (projetId) {
-            //     let projet = await projet.findById(projetId, 'taches');
-            //     return projet.taches;
-            // }
-            // //Get all taches
-            // else {
-            //     let taches = [];
-            //     let projets = await Projet.find({ taches: { $exists: true } });
-            //     projets.map(projet => {
-            //         projet.taches.map(tache => taches.push(tache));
-            //     });
-                return [];
-            
+             if (projetId) {
+                let projet = await projet.findById(projetId);
+                return projet.taches;
+             }
+             //Get all taches
+             else {
+                let taches = [];
+                 let projets = await Projet.find({ taches: { $exists: true } });
+                 projets.map(projet => {
+                     projet.taches.map(tache => taches.push(tache));
+                 });
+                return taches;
+                }
         },
 
         // tache: async (parent, { tacheId }) => {

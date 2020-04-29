@@ -5,7 +5,7 @@ const query = gql`
         
         # Projets
         projets: [Projet]
-       # projet(projetId: ID!): Projet
+        projet(projetId: ID!): Projet
 
         # Taches
         taches(portfolioId: ID): [Tache]
