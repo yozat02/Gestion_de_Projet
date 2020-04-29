@@ -3,10 +3,10 @@ const mongoose = require('mongoose');
 
 const tachesResolvers = {
     Query: {
-        taches: async (parent, { projetId }) => {
+        taches: async (parent, { portfolioId }) => {
             // //Get taches by projetId
-             if (projetId) {
-                let projet = await projet.findById(projetId);
+             if (portfolioId) {
+                let projet = await Projet.findById(portfolioId);
                 return projet.taches;
              }
              //Get all taches
