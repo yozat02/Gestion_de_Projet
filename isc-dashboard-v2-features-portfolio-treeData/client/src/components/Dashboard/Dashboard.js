@@ -20,6 +20,7 @@ import AppMenu from "../AppMenu/AppMenu";
 import Home from "../Home/Home";
 import Copyright from "../Copyright/Copyright"
 import CheckupsProjectPage from '../Pages/Projets'
+import CheckupsTachesPage from '../Pages/Taches';
 
 
 const drawerWidth = 240;
@@ -165,6 +166,7 @@ const Dashboard = withRouter(({ location: { pathname } }) => {
                         <Switch>
                             <Route path="/" exact component={Home} />
                             <Route path="/checkup/Projet/:id" exact component={CheckupsProjectPage} />
+                            <Route path="/checkup/Tache/:id" exact component={CheckupsTachesPage} />
                         </Switch>
                     </Grid>
                     <Box pt={4}>
