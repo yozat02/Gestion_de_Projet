@@ -9,7 +9,12 @@ const developpeursResolvers = {
 
         developpeur: async (parent, { developpeurId }) => {
           return await Developpeur.findById(developpeurId);
-         }
+         },
+        developpeurByTacheId : async (parent ,{tacheId}) => {
+            let developpeur = []
+            
+            return developpeur;
+        }
     },
     // Mutation: {
     //     createDeveloppeur: async (root, { input }) => {

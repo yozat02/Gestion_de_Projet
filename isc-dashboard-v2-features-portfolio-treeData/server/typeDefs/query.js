@@ -9,11 +9,12 @@ const query = gql`
 
         # Taches
         taches(portfolioId: ID): [Tache]
-      #  tache(tacheId: ID!): Tache
+         tache(tacheId: ID!): Tache
         
         # Developpeurs
         developpeurs: [Developpeur]
-      developpeur(developpeurId: String!): Developpeur
+        developpeur(developpeurId: String!): Developpeur
+        developpeurByTacheId(tacheId: ID!) :[Developpeur]
     } 
 `;
 

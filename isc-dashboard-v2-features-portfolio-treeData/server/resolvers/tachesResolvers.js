@@ -20,11 +20,11 @@ const tachesResolvers = {
                 }
         },
 
-        // tache: async (parent, { tacheId }) => {
-        //     let projet = await Projet.findOne({ taches: { $elemMatch: { _id: mongoose.Types.ObjectId(tacheId) } } });
-        //     let taches = Array.from(projet.taches);
-        //     return taches.find(e => e._id.toString() === tacheId);
-        // }
+        tache: async (parent, { tacheId }) => {
+           let projet = await Projet.findOne({ taches: { $elemMatch: { _id: mongoose.Types.ObjectId(tacheId) } } });
+            let taches = Array.from(projet.taches);
+           return taches.find(e => e._id.toString() === tacheId);
+         }
     },
     // Mutation: {
     //     createtache: async (root, { input }) => {
