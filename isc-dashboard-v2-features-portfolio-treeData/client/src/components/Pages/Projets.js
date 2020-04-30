@@ -26,12 +26,15 @@ const CheckupsProjetsPage = ({match}) => {
 
   if (loading) return <p>Loading...</p>;
 
-  if (error || data.taches==null) return <p>Error :(</p>;
-
+  
+  let array = data.taches
+  if( array==null){
+    array = []
+  }
   return (
     
       <div className={classes.allWidth}>
-        <TreeTable title={"Liste des taches"} tableData={data.taches} />
+        <TreeTable title={"Liste des taches"} tableData={array} />
       </div>
     
   );

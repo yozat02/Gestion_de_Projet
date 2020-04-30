@@ -21,17 +21,21 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckupsTachesPage = ({match}) => {
   const classes = useStyles();
-  console.log("match",match.params.id)
+  console.log("match",match)
  
   let { loading, error, data } = useQuery(DEVELOPPEURS,{ variables: {tacheId: match.params.id},});
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  let array = []
+  if (!error) {
+    array = data.developpeurByTacheId
+  }
+
   
   return (
     
       <div className={classes.allWidth}>
-        <TreeTable title={"Liste des developpeurs"} tableData={data.developpeurByTacheId} />
+        <TreeTable title={"Liste des developpeurs"} tableData={array} />
       </div>
     
   );

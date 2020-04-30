@@ -75,6 +75,30 @@ export const  TreeTable = ({ tableData,title,addItem } = []) => {
                   });
                 }, 600);
               }),
+              onRowUpdate: (newData, oldData) =>
+              new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve();
+                  if (oldData) {
+                    setState((prevState) => {
+                      const data = [...prevState.data];
+                      data[data.indexOf(oldData)] = newData;
+                      return { ...prevState, data };
+                    });
+                  }
+                }, 600);
+              }),
+            onRowDelete: (oldData) =>
+              new Promise((resolve) => {
+                setTimeout(() => {
+                  resolve();
+                  setState((prevState) => {
+                    const data = [...prevState.data];
+                    data.splice(data.indexOf(oldData), 1);
+                    return { ...prevState, data };
+                  });
+                }, 600);
+              }),
           }}
             columns={state.columns}
             onRowClick={(event, rowData) => {handleClick(rowData.__typename,rowData._id)}}
