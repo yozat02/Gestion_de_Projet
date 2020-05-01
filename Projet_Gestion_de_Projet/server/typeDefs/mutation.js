@@ -11,6 +11,7 @@ const mutation = gql`
         # Update
         
         # Delete
+         deleteTache(id :ID!) : Boolean
     } 
 `;
 

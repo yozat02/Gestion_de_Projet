@@ -1,4 +1,6 @@
 const { Projet } = require("../models/Projet")
+const { Developpeur } = require("../models/Developpeur")
+
 const mongoose = require('mongoose');
 
 const tachesResolvers = {
@@ -41,7 +43,40 @@ const tachesResolvers = {
             await projet.save();
             return tache;
         },
+        // delete tache
+        deleteTache: async (obj, { id }) => {
+            try {
+                let developpeurs = [];
+
+                let isTacheSuccessfullyDeleted = false;
+                let isDeveloppeursSuccessfullyDeleted = false;
+                let notFoundNestedDeveloppeurs = false;
+
+                const filter = { taches: { $elemMatch: { _id: mongoose.Types.ObjectId(id) } } };
+                const remove = { $pull: { taches: { _id: mongoose.Types.ObjectId(id) } } };
+
+                let tache;
+
+                const query = await Projet.findOneAndUpdate(filter, remove);
+                if (query && query.taches) {
+                    isTacheSuccessfullyDeleted = true;
+                    tache = query.taches.find(e => e._id.toString() === id);
+                    tache.developpeurs && tache.developpeurs.map(e => developpeurs.push(e));
+                }
+                // DELETE * Developpeurs
+                if (developpeurs.length >= 1) {
+                    let deleteMany = await Developpeur.deleteMany({ _id: { $in: developpeurs } });
+                    if(deleteMany.deletedCount === developpeurs.length) isDeveloppeursSuccessfullyDeleted = true;
+                } else {
+                    notFoundNestedDeveloppeurs = true
+                }
+
+                return isTacheSuccessfullyDeleted && (isDeveloppeursSuccessfullyDeleted || notFoundNestedDeveloppeurs);
+            } catch (error) {
+                throw new Error(error);
+            }
     },
+}
 };
 
 module.exports = {
