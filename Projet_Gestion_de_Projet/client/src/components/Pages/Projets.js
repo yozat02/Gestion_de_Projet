@@ -4,6 +4,10 @@ import {TreeTable} from "../Home/TreeTable/TreeTable";
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 
 const TACHES = gql`
@@ -12,6 +16,10 @@ query taches($portfolioId: ID!) {
     _id
       name 
     description 
+  }
+  projet(projetId: $portfolioId){
+    name
+    description
   }
 }
 `;
@@ -28,7 +36,9 @@ const ADD_TACHE = gql`
 const useStyles = makeStyles((theme) => ({
   allWidth: {
     width: "100%",
+    marginBottom: "20px"
   },
+
 }));
 
 export const CheckupsProjetsPage = ({match}) => {
@@ -54,6 +64,18 @@ export const CheckupsProjetsPage = ({match}) => {
   return (
     
       <div className={classes.allWidth}>
+        <Card className={classes.allWidth} >
+          <CardActionArea>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+               <h5>Nom du Projet : {data.projet.name}</h5> 
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+               <h2>description : {data.projet.description}</h2> 
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
         <TreeTable title={"Liste des taches"} tableData={array} addItem={addItem} />
       </div>
     
