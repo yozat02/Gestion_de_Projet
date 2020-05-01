@@ -5,6 +5,11 @@ const developpeurType = gql`
         _id: ID
         name: String
     }
+    input DeveloppeurInput {
+        _id: ID
+        tacheId: ID
+        name: String
+    }
 `;
 module.exports = {
     developpeurType
