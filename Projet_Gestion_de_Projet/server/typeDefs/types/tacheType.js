@@ -6,6 +6,12 @@ const tacheType = gql`
         description: String
         developpeurs: [String]
     }
+    input TacheInput {
+        _id : ID
+        projetId: ID
+        name: String
+        description: String
+    }
 `;
 
 module.exports = {

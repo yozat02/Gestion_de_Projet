@@ -5,7 +5,7 @@ const mutation = gql`
         
         # Create
         createProjet(input: ProjetInput): Projet
-        # createTache(input: TacheInput): Tache
+        createTache(input: TacheInput): Tache
         # createDeveloppeur(input: DeveloppeurInput): Developpeur
 
         # Update

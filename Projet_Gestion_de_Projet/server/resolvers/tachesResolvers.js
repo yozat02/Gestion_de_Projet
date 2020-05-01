@@ -26,16 +26,16 @@ const tachesResolvers = {
            return taches.find(e => e._id.toString() === tacheId);
          }
     },
-    // Mutation: {
-    //     createtache: async (root, { input }) => {
-    //         let tache = { _id: new mongoose.Types.ObjectId, name: input.name, description: input.description }
-    //         let projet = await Projet.findById(input.projetId);
-    //         if (!projet.taches) projet['taches'] = [];
-    //         projet.taches.push(tache);
-    //         await projet.save();
-    //         return tache;
-    //     },
-    // },
+    Mutation: {
+        createTache: async (root, { input }) => {
+            let tache = { _id: new mongoose.Types.ObjectId, name: input.name, description: input.description }
+            let projet = await Projet.findById(input.projetId);
+            if (!projet.taches) projet['taches'] = [];
+            projet.taches.push(tache);
+            await projet.save();
+            return tache;
+        },
+    },
 };
 
 module.exports = {
