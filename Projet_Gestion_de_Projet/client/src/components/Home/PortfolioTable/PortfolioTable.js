@@ -25,9 +25,12 @@ const ADD_PROJET = gql`
 
 
 export const PortfolioTable = () => {
+const  columns= [
+  { title: 'Nom', field: 'name' },
+  { title: 'Description', field: 'description' },
+]
   
-  
-let { loading, error, data } = useQuery(PROJETS);
+const { loading, error, data } = useQuery(PROJETS);
 const [addProjet] = useMutation(ADD_PROJET);
   const addItem = (name,description) => {
     addProjet({
@@ -44,7 +47,7 @@ const [addProjet] = useMutation(ADD_PROJET);
 
     console.log(data)
     return (
-       <TreeTable tableData={data.projets} title={'Liste des projets'} addItem={addItem} />
+       <TreeTable tableData={data.projets} columns={columns} title={'Liste des projets'} addItem={addItem} />
     );
 }
 

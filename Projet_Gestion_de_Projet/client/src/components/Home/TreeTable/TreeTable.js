@@ -18,14 +18,10 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useHistory } from 'react-router-dom'
 
-export const  TreeTable = ({ tableData,title,addItem } = []) => {
+export const  TreeTable = ({ tableData,columns,title,addItem } = []) => {
 
 
     const [state, setState] = React.useState({
-        columns: [
-            { title: 'Nom', field: 'name' },
-            { title: 'Description', field: 'description' },
-        ],
         data : tableData
       });
 
@@ -100,7 +96,7 @@ export const  TreeTable = ({ tableData,title,addItem } = []) => {
                 }, 600);
               }),
           }}
-            columns={state.columns}
+            columns={columns}
             onRowClick={(event, rowData) => {handleClick(rowData.__typename,rowData._id)}}
             options={{
                 actionsColumnIndex: -1,

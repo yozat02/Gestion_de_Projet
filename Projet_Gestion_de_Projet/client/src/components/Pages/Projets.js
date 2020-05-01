@@ -43,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
 
 export const CheckupsProjetsPage = ({match}) => {
   const classes = useStyles(); 
+  const  columns= [
+    { title: 'Nom', field: 'name' },
+    { title: 'Description', field: 'description' },
+  ]
   let { loading, error, data } = useQuery(TACHES,{ variables: {portfolioId: match.params.id},});
   const [addTache] = useMutation(ADD_TACHE);
   const addItem = (name,description) => {
@@ -76,7 +80,7 @@ export const CheckupsProjetsPage = ({match}) => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <TreeTable title={"Liste des taches"} tableData={array} addItem={addItem} />
+        <TreeTable title={"Liste des taches"} columns={columns} tableData={array} addItem={addItem} />
       </div>
     
   );

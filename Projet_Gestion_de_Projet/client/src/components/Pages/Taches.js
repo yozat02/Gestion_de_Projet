@@ -39,7 +39,9 @@ const useStyles = makeStyles((theme) => ({
 
 const CheckupsTachesPage = ({match}) => {
   const classes = useStyles();
-  console.log("match",match)
+  const  columns= [
+    { title: 'Nom', field: 'name' },
+  ]
  
   let { loading, error, data } = useQuery(DEVELOPPEURS,{ variables: {tacheId: match.params.id},});
   const [addDev] = useMutation(ADD_DEVELOPPEUR);
@@ -74,7 +76,7 @@ const CheckupsTachesPage = ({match}) => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <TreeTable title={"Liste des developpeurs"} tableData={array} addItem={addItem} />
+        <TreeTable title={"Liste des developpeurs"} columns={columns} tableData={array} addItem={addItem} />
       </div>
     
   );
