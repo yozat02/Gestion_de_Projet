@@ -71,7 +71,7 @@ export const CheckupsProjetsPage = ({match}) => {
                <h5>Nom du Projet : {data.projet.name}</h5> 
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-               <h2>description : {data.projet.description}</h2> 
+               <h2>Description : {data.projet.description}</h2> 
               </Typography>
             </CardContent>
           </CardActionArea>
