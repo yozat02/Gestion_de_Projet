@@ -3,6 +3,8 @@ const tacheType = gql`
     type Tache {
         _id: ID
         name: String
+        dateDebut : String
+        dateFin : String
         description: String
         developpeurs: [String]
     }
@@ -11,6 +13,8 @@ const tacheType = gql`
         projetId: ID
         name: String
         description: String
+        dateDebut : String
+        dateFin : String
     }
 `;
 

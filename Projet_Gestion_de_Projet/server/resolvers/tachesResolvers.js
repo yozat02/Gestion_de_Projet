@@ -28,7 +28,13 @@ const tachesResolvers = {
     },
     Mutation: {
         createTache: async (root, { input }) => {
-            let tache = { _id: new mongoose.Types.ObjectId, name: input.name, description: input.description }
+            let tache = {
+                 _id: new mongoose.Types.ObjectId,
+                 name: input.name,
+                  description: input.description,
+                  dateDebut :input.dateDebut,
+                  dateFin :input.dateFin
+                }
             let projet = await Projet.findById(input.projetId);
             if (!projet.taches) projet['taches'] = [];
             projet.taches.push(tache);

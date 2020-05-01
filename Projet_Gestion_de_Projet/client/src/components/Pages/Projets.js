@@ -14,8 +14,10 @@ const TACHES = gql`
 query taches($portfolioId: ID!) {
     taches(portfolioId: $portfolioId) {
     _id
-      name 
-    description 
+    name 
+    description
+    dateDebut
+    dateFin
   }
   projet(projetId: $portfolioId){
     name
@@ -28,6 +30,8 @@ const ADD_TACHE = gql`
     createTache(input: $input) {
       name
       description
+      dateDebut
+      dateFin
     }
   }
 `;
@@ -46,13 +50,16 @@ export const CheckupsProjetsPage = ({match}) => {
   const  columns= [
     { title: 'Nom', field: 'name' },
     { title: 'Description', field: 'description' },
+    { title: 'Date de debut', field: 'dateDebut' },
+    { title: 'Date de fin', field: 'dateFin'}
+    
   ]
   let { loading, error, data } = useQuery(TACHES,{ variables: {portfolioId: match.params.id},});
   const [addTache] = useMutation(ADD_TACHE);
-  const addItem = (name,description) => {
+  const addItem = (name,description,dateDebut,dateFin) => {
     addTache({
       variables: {
-          input: {"projetId":match.params.id,"name": name ,"description" :description },
+          input: {"projetId":match.params.id,"name": name ,"description" :description,"dateDebut":dateDebut,"dateFin":dateFin },
           refetchQueries: [{ query: TACHES }],
       }
      });

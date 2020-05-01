@@ -63,7 +63,7 @@ export const  TreeTable = ({ tableData,columns,title,addItem } = []) => {
               new Promise((resolve) => {
                 setTimeout(() => {
                   resolve();
-                  addItem(newData.name,newData.description)
+                  addItem(newData.name,newData.description,newData.dateDebut,newData.dateFin)
                   setState((prevState) => {
                     const data = [...prevState.data];
                     data.push(newData);
