@@ -35,6 +35,11 @@ const ADD_TACHE = gql`
     }
   }
 `;
+const DELETE_TACHE = gql`
+mutation deleteTache($id: ID!) {
+  deleteTache(id: $id) 
+}
+`;
 
 
 const useStyles = makeStyles((theme) => ({
@@ -56,10 +61,20 @@ export const CheckupsProjetsPage = ({match}) => {
   ]
   let { loading, error, data } = useQuery(TACHES,{ variables: {portfolioId: match.params.id},});
   const [addTache] = useMutation(ADD_TACHE);
+  const [deleteTache] =useMutation(DELETE_TACHE);
   const addItem = (name,description,dateDebut,dateFin) => {
     addTache({
       variables: {
           input: {"projetId":match.params.id,"name": name ,"description" :description,"dateDebut":dateDebut,"dateFin":dateFin },
+          refetchQueries: [{ query: TACHES }],
+      }
+     });
+    }
+  const deleteItem = (item) => {
+    console.log(item)
+    deleteTache({
+      variables: {
+          id: item._id,
           refetchQueries: [{ query: TACHES }],
       }
      });
@@ -87,7 +102,13 @@ export const CheckupsProjetsPage = ({match}) => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <TreeTable title={"Liste des taches"} columns={columns} tableData={array} addItem={addItem} />
+        <TreeTable 
+          title={"Liste des taches"} 
+          columns={columns} 
+          tableData={array} 
+          addItem={addItem} 
+          deleteItem={deleteItem}
+          />
       </div>
     
   );
