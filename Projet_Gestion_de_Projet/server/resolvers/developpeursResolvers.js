@@ -15,7 +15,9 @@ const developpeursResolvers = {
             let projet = await Projet.findOne({ taches: { $elemMatch: { _id: mongoose.Types.ObjectId(tacheId) } } });
             let taches = Array.from(projet.taches);
             let tache = taches.find(e => e._id.toString() === tacheId);
-            tache.developpeurs.map(dev => developpeur.push(Developpeur.findById(dev)) )
+            if(tache.developpeurs){
+                tache.developpeurs.map(dev => developpeur.push(Developpeur.findById(dev)) )
+            }
             return developpeur;
         }
     },

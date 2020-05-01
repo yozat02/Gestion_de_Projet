@@ -11,14 +11,17 @@ import Typography from '@material-ui/core/Typography';
 
 const DEVELOPPEURS = gql`
 query developpeurByTacheId($tacheId: ID!) {
+  tache(tacheId: $tacheId){
+    name 
+    description
+    dateDebut
+    dateFin
+  }
   developpeurByTacheId(tacheId: $tacheId) {
     _id
     name 
   }
-  tache(tacheId: $tacheId){
-    name 
-    description
-  }
+  
 }
 `;
 const ADD_DEVELOPPEUR = gql`
@@ -44,6 +47,7 @@ const CheckupsTachesPage = ({match}) => {
   ]
  
   let { loading, error, data } = useQuery(DEVELOPPEURS,{ variables: {tacheId: match.params.id},});
+  console.log(error,data)
   const [addDev] = useMutation(ADD_DEVELOPPEUR);
   const addItem = (name) => {
     addDev({
@@ -53,10 +57,9 @@ const CheckupsTachesPage = ({match}) => {
       }
      });
     }
-  let tache = data
   if (loading) return <p>Loading...</p>;
   let array = []
-  if (!error) {
+  if (data) {
     array = data.developpeurByTacheId
   }
 
@@ -68,10 +71,16 @@ const CheckupsTachesPage = ({match}) => {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-               <h5>Nom du Tache : {tache.tache.name}</h5> 
+               <h5>Nom du Tache : {data.tache.name}</h5> 
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-               <h2>Description : {tache.tache.description}</h2> 
+               <h2>Description : {data.tache.description}</h2> 
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+               <h2>Date de debut : {data.tache.dateDebut}</h2> 
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+               <h2>Date de fin : {data.tache.dateFin}</h2> 
               </Typography>
             </CardContent>
           </CardActionArea>
