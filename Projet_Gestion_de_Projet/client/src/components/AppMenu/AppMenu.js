@@ -40,28 +40,8 @@ const AppMenu = withRouter(({ location: { pathname }, open }) => {
                     <ListItemIcon>
                         <DashboardIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Dashboard" />
+                    <ListItemText primary="Mes Projets" />
                 </ListItem>
-
-                {/* CHECKUPS */}
-                <ListItem button onClick={() => setOpenCheckups(!openCheckups)}>
-                    <ListItemIcon>
-                        <VerifiedUserIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Pages" />
-                    {openCheckups ? <ExpandLess /> : <ExpandMore />}
-                </ListItem>
-                <Collapse in={openCheckups} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                        <ListItem button className={open && classes.nested} component={NavLink} to="/checkup/project" selected={'/checkup/project' === pathname}>
-                            <ListItemIcon>
-                                <ArrowRightIcon />
-                            </ListItemIcon>
-                            <ListItemText primary="Project" />
-                        </ListItem>
-                    </List>
-                </Collapse>
-
             </List>
         </div>
 
