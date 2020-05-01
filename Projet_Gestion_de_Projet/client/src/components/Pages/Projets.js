@@ -71,7 +71,6 @@ export const CheckupsProjetsPage = ({match}) => {
      });
     }
   const deleteItem = (item) => {
-    console.log(item)
     deleteTache({
       variables: {
           id: item._id,

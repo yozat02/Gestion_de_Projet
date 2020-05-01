@@ -47,7 +47,6 @@ const CheckupsTachesPage = ({match}) => {
   ]
  
   let { loading, error, data } = useQuery(DEVELOPPEURS,{ variables: {tacheId: match.params.id},});
-  console.log(error,data)
   const [addDev] = useMutation(ADD_DEVELOPPEUR);
   const addItem = (name) => {
     addDev({
@@ -62,10 +61,8 @@ const CheckupsTachesPage = ({match}) => {
   if (data) {
     array = data.developpeurByTacheId
   }
-
   
   return (
-    
       <div className={classes.allWidth}>
         <Card className={classes.allWidth} >
           <CardActionArea>

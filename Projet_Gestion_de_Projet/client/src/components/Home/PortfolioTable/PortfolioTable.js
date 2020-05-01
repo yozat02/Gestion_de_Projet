@@ -44,8 +44,6 @@ const [addProjet] = useMutation(ADD_PROJET);
   
   if (loading) return <p>Loading...</p>;
   
-
-    console.log(data)
     return (
        <TreeTable tableData={data.projets} columns={columns} title={'Liste des projets'} addItem={addItem} />
     );
