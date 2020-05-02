@@ -73,6 +73,10 @@ const CheckupsTachesPage = ({match}) => {
       }
      });
   }
+  const deleteItem = (item) => {
+    
+  }
+  
   if (loading) return <p>Loading...</p>;
   let array = []
   if (data) {
@@ -105,6 +109,7 @@ const CheckupsTachesPage = ({match}) => {
           tableData={array} 
           addItem={addItem} 
           updateItem={updateItem}
+          deleteItem={deleteItem}
           rowClick={false}
           />
       </div>
