@@ -43,6 +43,27 @@ const tachesResolvers = {
             await projet.save();
             return tache;
         },
+        // update tache
+        updateTache: async (obj, { input: { tacheId, name, description,dateDebut,dateFin} }) => {
+            try {
+                let tache = null;
+                const filter = { taches: { $elemMatch: { _id: mongoose.Types.ObjectId(tacheId) } } };
+                const update = { $set: { 
+                    "taches.$.name": name,
+                    "taches.$.description": description,
+                    "taches.$.dateDebut": dateDebut,
+                    "taches.$.dateFin": dateFin} 
+                };
+                const options = { new: true };
+                const query = await Projet.findOneAndUpdate(filter, update, options);
+                if (query && query.taches) {
+                    taches = query.taches.find(e => e._id.toString() === tacheId);
+                }
+                return tache;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
         // delete tache
         deleteTache: async (obj, { id }) => {
             try {

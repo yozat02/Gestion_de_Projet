@@ -9,7 +9,7 @@ const tacheType = gql`
         developpeurs: [String]
     }
     input TacheInput {
-        _id : ID
+        tacheId : ID
         projetId: ID
         name: String
         description: String
