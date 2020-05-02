@@ -8,7 +8,7 @@ const projetType = gql`
         developpeurs: [String]
     }
     input ProjetInput {
-        id: ID
+        projetId: ID
         name: String
         description: String
     }

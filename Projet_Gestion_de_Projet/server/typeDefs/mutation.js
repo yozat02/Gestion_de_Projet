@@ -9,6 +9,7 @@ const mutation = gql`
         createDeveloppeur(input: DeveloppeurInput): Developpeur
 
         # Update
+        updateProjet(input :ProjetInput) : Projet
         updateTache(input :TacheInput) : Tache
         updateDeveloppeur(input :DeveloppeurInput) : Developpeur
         # Delete
