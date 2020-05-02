@@ -22,6 +22,13 @@ const ADD_PROJET = gql`
     }
   }
 `;
+const UPDATE_PROJET = gql`
+  mutation updateProjet($input: ProjetInput) {
+    updateProjet(input: $input){
+      name
+    }
+  }
+`;
 
 
 export const PortfolioTable = () => {
@@ -32,6 +39,8 @@ const  columns= [
   
 const { loading, error, data } = useQuery(PROJETS);
 const [addProjet] = useMutation(ADD_PROJET);
+const [updateProjet] = useMutation(UPDATE_PROJET);
+
   const addItem = (name,description) => {
     addProjet({
       variables: {
@@ -40,12 +49,19 @@ const [addProjet] = useMutation(ADD_PROJET);
       }
   });
   }
-
+  const updateItem = (item) => {
+    updateProjet({
+      variables: {
+        input: {"projetId":item._id,"name": item.name ,"description" :item.description },
+          refetchQueries: [{ query: PROJETS }],
+      }
+     });
+  }
   
   if (loading) return <p>Loading...</p>;
   
     return (
-       <TreeTable tableData={data.projets} columns={columns} title={'Liste des projets'} addItem={addItem} />
+       <TreeTable tableData={data.projets} columns={columns} title={'Liste des projets'} addItem={addItem} updateItem={updateItem} />
     );
 }
 
