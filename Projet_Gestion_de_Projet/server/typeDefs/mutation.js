@@ -10,6 +10,7 @@ const mutation = gql`
 
         # Update
         updateTache(input :TacheInput) : Tache
+        updateDeveloppeur(input :DeveloppeurInput) : Developpeur
         # Delete
          deleteTache(id :ID!) : Boolean
     } 

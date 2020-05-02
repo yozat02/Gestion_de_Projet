@@ -41,6 +41,14 @@ const developpeursResolvers = {
             return developpeur
 
         },
+        // Update developpeur
+        updateDeveloppeur: async (obj, { input: { developpeurId, name} }) => {
+            try {
+                return await Developpeur.findByIdAndUpdate(developpeurId, { name}, { new: true })
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
     },
 };
 

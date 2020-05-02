@@ -6,7 +6,7 @@ const developpeurType = gql`
         name: String
     }
     input DeveloppeurInput {
-        _id: ID
+        developpeurId: ID
         tacheId: ID
         name: String
     }
