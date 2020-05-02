@@ -54,7 +54,7 @@ export const CheckupsProjetsPage = ({match}) => {
   const classes = useStyles(); 
   const  columns= [
     { title: 'Nom', field: 'name' },
-    { title: 'Description', field: 'description' },
+    { title: 'Description', field: 'description',width: 700 },
     { title: 'Date de debut', field: 'dateDebut' },
     { title: 'Date de fin', field: 'dateFin'}
     
