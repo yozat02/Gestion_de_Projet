@@ -61,7 +61,14 @@ const [updateProjet] = useMutation(UPDATE_PROJET);
   if (loading) return <p>Loading...</p>;
   
     return (
-       <TreeTable tableData={data.projets} columns={columns} title={'Liste des projets'} addItem={addItem} updateItem={updateItem} />
+       <TreeTable 
+        tableData={data.projets}
+         columns={columns} 
+         title={'Liste des projets'}
+          addItem={addItem}
+           updateItem={updateItem} 
+           rowClick={true}
+      />
     );
 }
 

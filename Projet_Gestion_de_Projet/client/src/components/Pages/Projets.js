@@ -125,6 +125,7 @@ export const CheckupsProjetsPage = ({match}) => {
           addItem={addItem} 
           deleteItem={deleteItem}
           updateItem={updateItem}
+          rowClick={true}
           />
       </div>
     

@@ -99,7 +99,14 @@ const CheckupsTachesPage = ({match}) => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <TreeTable title={"Liste des developpeurs"} columns={columns} tableData={array} addItem={addItem} updateItem={updateItem} />
+        <TreeTable 
+          title={"Liste des developpeurs"} 
+          columns={columns} 
+          tableData={array} 
+          addItem={addItem} 
+          updateItem={updateItem}
+          rowClick={false}
+          />
       </div>
     
   );
