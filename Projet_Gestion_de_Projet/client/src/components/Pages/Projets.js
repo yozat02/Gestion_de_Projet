@@ -35,6 +35,14 @@ const ADD_TACHE = gql`
     }
   }
 `;
+const UPDATE_TACHE = gql`
+  mutation updateTache($input: TacheInput) {
+    updateTache(input: $input){
+      name
+      dateFin
+    }
+  }
+`;
 const DELETE_TACHE = gql`
 mutation deleteTache($id: ID!) {
   deleteTache(id: $id) 
@@ -62,6 +70,7 @@ export const CheckupsProjetsPage = ({match}) => {
   let { loading, error, data } = useQuery(TACHES,{ variables: {portfolioId: match.params.id},});
   const [addTache] = useMutation(ADD_TACHE);
   const [deleteTache] =useMutation(DELETE_TACHE);
+  const [updateTache] =useMutation(UPDATE_TACHE);
   const addItem = (name,description,dateDebut,dateFin) => {
     addTache({
       variables: {
@@ -69,7 +78,15 @@ export const CheckupsProjetsPage = ({match}) => {
           refetchQueries: [{ query: TACHES }],
       }
      });
-    }
+  }
+  const updateItem = (item) => {
+    updateTache({
+      variables: {
+        input: {"tacheId":item._id,"name": item.name ,"description" :item.description,"dateDebut":item.dateDebut,"dateFin":item.dateFin },
+          refetchQueries: [{ query: TACHES }],
+      }
+     });
+  }
   const deleteItem = (item) => {
     deleteTache({
       variables: {
@@ -77,7 +94,7 @@ export const CheckupsProjetsPage = ({match}) => {
           refetchQueries: [{ query: TACHES }],
       }
      });
-    }
+  }
 
   if (loading) return <p>Loading...</p>;
 
@@ -107,6 +124,7 @@ export const CheckupsProjetsPage = ({match}) => {
           tableData={array} 
           addItem={addItem} 
           deleteItem={deleteItem}
+          updateItem={updateItem}
           />
       </div>
     

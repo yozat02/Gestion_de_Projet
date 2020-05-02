@@ -18,7 +18,7 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { useHistory } from 'react-router-dom'
 
-export const  TreeTable = ({ tableData,columns,title,addItem,deleteItem} = []) => {
+export const  TreeTable = ({ tableData,columns,title,addItem,deleteItem,updateItem} = []) => {
 
 
     const [state, setState] = React.useState({
@@ -75,6 +75,7 @@ export const  TreeTable = ({ tableData,columns,title,addItem,deleteItem} = []) =
               new Promise((resolve) => {
                 setTimeout(() => {
                   resolve();
+                  updateItem(newData)
                   if (oldData) {
                     setState((prevState) => {
                       const data = [...prevState.data];
