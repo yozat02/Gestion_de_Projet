@@ -31,6 +31,13 @@ const ADD_DEVELOPPEUR = gql`
     }
   }
 `;
+const UPDATE_DEVELOPPEUR = gql`
+  mutation updateDeveloppeur($input: DeveloppeurInput) {
+    updateDeveloppeur(input: $input){
+      name
+    }
+  }
+`;
 
 const useStyles = makeStyles((theme) => ({
   allWidth: {
@@ -48,6 +55,8 @@ const CheckupsTachesPage = ({match}) => {
  
   let { loading, error, data } = useQuery(DEVELOPPEURS,{ variables: {tacheId: match.params.id},});
   const [addDev] = useMutation(ADD_DEVELOPPEUR);
+  const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
+
   const addItem = (name) => {
     addDev({
       variables: {
@@ -55,7 +64,15 @@ const CheckupsTachesPage = ({match}) => {
           refetchQueries: [{ query: DEVELOPPEURS }],
       }
      });
-    }
+  }
+  const updateItem = (item) => {
+    updateDeveloppeur({
+      variables: {
+        input: {"developpeurId":item._id,"name": item.name},
+          refetchQueries: [{ query: DEVELOPPEURS}],
+      }
+     });
+  }
   if (loading) return <p>Loading...</p>;
   let array = []
   if (data) {
@@ -82,7 +99,7 @@ const CheckupsTachesPage = ({match}) => {
             </CardContent>
           </CardActionArea>
         </Card>
-        <TreeTable title={"Liste des developpeurs"} columns={columns} tableData={array} addItem={addItem} />
+        <TreeTable title={"Liste des developpeurs"} columns={columns} tableData={array} addItem={addItem} updateItem={updateItem} />
       </div>
     
   );
