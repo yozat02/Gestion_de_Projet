@@ -11,6 +11,7 @@ const tacheType = gql`
     input TacheInput {
         tacheId : ID
         projetId: ID
+        reunionId : ID
         name: String
         description: String
         dateDebut : String

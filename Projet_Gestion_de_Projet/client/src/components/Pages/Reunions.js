@@ -13,11 +13,17 @@ import Typography from '@material-ui/core/Typography';
 const TACHES = gql`
 query taches($portfolioId: ID!) {
   reunion(reunionId: $portfolioId){
+      _id
     name
     description
     date
+    parent
   }
- 
+  tacheByReunionId(reunionId:$portfolioId){
+    _id
+      name
+      description
+    }
 }
 `;
 const ADD_TACHE = gql`
@@ -69,7 +75,7 @@ export const CheckupsProjetsPage = ({match}) => {
   const addItem = (name,description,dateDebut,dateFin) => {
     addTache({
       variables: {
-          input: {"projetId":match.params.id,"name": name ,"description" :description,"dateDebut":dateDebut,"dateFin":dateFin },
+          input: {"projetId":data.reunion.parent,"reunionId":data.reunion._id,"name": name ,"description" :description,"dateDebut":dateDebut,"dateFin":dateFin },
           refetchQueries: [{ query: TACHES }],
       }
      });
@@ -113,7 +119,7 @@ export const CheckupsProjetsPage = ({match}) => {
         <TreeTable 
           title={"Liste des taches"} 
           columns={columns} 
-          tableData={!!data.taches ? data.taches : []} 
+          tableData={!!data.tacheByReunionId ? data.tacheByReunionId : []} 
           addItem={addItem} 
           deleteItem={deleteItem}
           updateItem={updateItem}
