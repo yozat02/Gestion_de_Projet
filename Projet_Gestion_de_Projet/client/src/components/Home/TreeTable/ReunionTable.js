@@ -35,8 +35,10 @@ export const ReunionTable = ({ tableData,projectId} = []) => {
         { title: 'Date', field: 'date' },  
       ]
 
-    function handleClick(type,id) {    
-   }
+      const history = useHistory();
+      function handleClick(type,id) {
+       history.push(`/checkup/Reunion/${projectId}`);
+     }
    const [addReunion] = useMutation(ADD_REUNION);
 
    const addItem = (name,description,date) => {
@@ -95,7 +97,7 @@ export const ReunionTable = ({ tableData,projectId} = []) => {
               }),
           }}
             columns={columns}
-            onRowClick={(event, rowData) => { handleClick(rowData.__typename,rowData._id)}}
+            onRowClick={(event, rowData) => {handleClick(rowData.__typename,rowData._id)}}
             options={{
                 actionsColumnIndex: -1,
                 paging: false,

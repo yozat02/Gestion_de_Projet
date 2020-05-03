@@ -21,6 +21,7 @@ import {Home} from "../Home/Home";
 import Copyright from "../Copyright/Copyright"
 import CheckupsProjectPage from '../Pages/Projets'
 import CheckupsTachesPage from '../Pages/Taches';
+import CheckupsReunionPage from '../Pages/Reunions';
 
 
 const drawerWidth = 240;
@@ -168,6 +169,7 @@ export const Dashboard = withRouter(({ location: { pathname } }) => {
                             <Route path="/" exact component={Home} />
                             <Route path="/checkup/Projet/:id" exact component={CheckupsProjectPage} />
                             <Route path="/checkup/Tache/:id" exact component={CheckupsTachesPage} />
+                            <Route path="/checkup/Reunion/:id" exact component={CheckupsReunionPage} />
                         </Switch>
                     </React.Suspense >
                     </Grid>
