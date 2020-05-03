@@ -49,10 +49,14 @@ const tachesResolvers = {
                   dateDebut :input.dateDebut,
                   dateFin :input.dateFin
                 }
-            let projet = await Projet.findById(input.projetId);
+            let projet = await Projet.findOne({ reunions: { $elemMatch: { _id: mongoose.Types.ObjectId(input.reunionId) } } });
+            let reunions = Array.from(projet.reunions);
+            let reunion =reunions.find(e => e._id.toString() === input.reunionId);
             if (!projet.taches) projet['taches'] = [];
+            reunion.taches.push(tache._id.toString())
             projet.taches.push(tache);
             await projet.save();
+            await Projet.findOneAndUpdate({ reunions: { $elemMatch: { _id: mongoose.Types.ObjectId(input.reunionId) } } }, { reunions: reunions })
             return tache;
         },
         // update tache

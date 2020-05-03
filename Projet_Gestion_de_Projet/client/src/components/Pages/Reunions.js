@@ -75,7 +75,7 @@ export const CheckupsProjetsPage = ({match}) => {
   const addItem = (name,description,dateDebut,dateFin) => {
     addTache({
       variables: {
-          input: {"projetId":data.reunion.parent,"reunionId":data.reunion._id,"name": name ,"description" :description,"dateDebut":dateDebut,"dateFin":dateFin },
+          input: {"projetId":data.reunion.parent,"reunionId":match.params.id,"name": name ,"description" :description,"dateDebut":dateDebut,"dateFin":dateFin },
           refetchQueries: [{ query: TACHES }],
       }
      });
