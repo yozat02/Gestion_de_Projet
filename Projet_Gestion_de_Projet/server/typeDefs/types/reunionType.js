@@ -5,10 +5,8 @@ const reunionType = gql`
         name: String
         description: String
         date : String
-        
     }
     input ReunionInput {
-        tacheId : ID
         projetId: ID
         name: String
         description: String

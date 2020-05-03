@@ -16,6 +16,10 @@ const projetSchema = new Schema({
         type: Array,
         default: undefined
     },
+    reunions: {
+        type: Array,
+        default: undefined
+    },
     developpeurs: {
         type: Array,
         default: undefined
