@@ -37,7 +37,7 @@ export const ReunionTable = ({ tableData,projectId} = []) => {
 
       const history = useHistory();
       function handleClick(type,id) {
-       history.push(`/checkup/Reunion/${projectId}`);
+       history.push(`/checkup/Reunion/${id}`);
      }
    const [addReunion] = useMutation(ADD_REUNION);
 

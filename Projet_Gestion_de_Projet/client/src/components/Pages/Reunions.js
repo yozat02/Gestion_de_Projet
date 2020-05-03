@@ -1,8 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {TreeTable} from "../Home/TreeTable/TreeTable";
-import {ReunionTable} from "../Home/TreeTable/ReunionTable";
-
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
@@ -14,16 +12,10 @@ import Typography from '@material-ui/core/Typography';
 
 const TACHES = gql`
 query taches($portfolioId: ID!) {
-    taches(portfolioId: $portfolioId) {
-    _id
-    name 
-    description
-    dateDebut
-    dateFin
-  }
-  projet(projetId: $portfolioId){
+  reunion(reunionId: $portfolioId){
     name
     description
+    date
   }
  
 }
@@ -100,12 +92,6 @@ export const CheckupsProjetsPage = ({match}) => {
   }
 
   if (loading) return <p>Loading...</p>;
-
-  
-  let array = data.taches
-  if( array==null){
-    array = []
-  }
   return (
     
       <div className={classes.allWidth}>
@@ -113,22 +99,21 @@ export const CheckupsProjetsPage = ({match}) => {
           <CardActionArea>
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-               <h5>Nom du Projet : {data.projet.name}</h5> 
+               <h5>Nom de la Reunion : {data.reunion.name}</h5> 
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-               <h2>Description : {data.projet.description}</h2> 
+               <h2>Description : {data.reunion.description}</h2> 
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+               <h2>Description : {data.reunion.date}</h2> 
               </Typography>
             </CardContent>
           </CardActionArea>
         </Card>
-        <ReunionTable  
-          tableData={data.reunions}
-          projectId ={match.params.id}
-          />
         <TreeTable 
           title={"Liste des taches"} 
           columns={columns} 
-          tableData={array} 
+          tableData={!!data.taches ? data.taches : []} 
           addItem={addItem} 
           deleteItem={deleteItem}
           updateItem={updateItem}
