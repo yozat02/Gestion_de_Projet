@@ -32,6 +32,7 @@ const reunionsResolvers = {
                  name: input.name,
                   description: input.description,
                   date :input.date,
+                  parent :input.parent
                 }
             let projet = await Projet.findById(input.projetId);
             if (!projet.reunions) projet['reunions'] = [];

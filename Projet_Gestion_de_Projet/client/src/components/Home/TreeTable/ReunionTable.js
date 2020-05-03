@@ -44,7 +44,7 @@ export const ReunionTable = ({ tableData,projectId} = []) => {
    const addItem = (name,description,date) => {
     addReunion({
       variables: {
-          input: {"projetId":projectId,"name": name ,"description" :description,"date":date },
+          input: {"projetId":projectId,"name": name ,"description" :description,"date":date,"parent" :projectId},
       }
      });
      window.location.reload(false) ;
