@@ -3,6 +3,18 @@ import MaterialTable from 'material-table';
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from "@material-ui/core/styles";
 import {tableIcons} from './icons'
+import { gql } from 'apollo-boost';
+import { useMutation } from '@apollo/react-hooks';
+
+const ADD_REUNION = gql`
+    mutation createReunion($input: ReunionInput) {
+        createReunion(input: $input) {
+        name
+        description
+        date
+        }
+    }
+`;
 const useStyles = makeStyles((theme) => ({
     allWidth: {
       width: "100%",
@@ -11,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   
   }));
   
-export const ReunionTable = ({ tableData} = []) => {
+export const ReunionTable = ({ tableData,projectId} = []) => {
     const classes = useStyles(); 
 
     const [state, setState] = React.useState({
@@ -23,9 +35,18 @@ export const ReunionTable = ({ tableData} = []) => {
         { title: 'Date', field: 'date' },  
       ]
 
-    function handleClick(type,id) {
-     
+    function handleClick(type,id) {    
    }
+   const [addReunion] = useMutation(ADD_REUNION);
+
+   const addItem = (name,description,date) => {
+    addReunion({
+      variables: {
+          input: {"projetId":projectId,"name": name ,"description" :description,"date":date },
+      }
+     });
+     window.location.reload(false) ;
+  }
     
     return (
         <div className={classes.allWidth}>
@@ -38,7 +59,7 @@ export const ReunionTable = ({ tableData} = []) => {
               new Promise((resolve) => {
                 setTimeout(() => {
                   resolve();
-                 // addItem(newData.name,newData.description,newData.dateDebut,newData.dateFin)
+                    addItem(newData.name,newData.description,newData.date)
                   setState((prevState) => {
                     const data = [...prevState.data];
                     data.push(newData);

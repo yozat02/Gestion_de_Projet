@@ -128,6 +128,7 @@ export const CheckupsProjetsPage = ({match}) => {
         </Card>
         <ReunionTable  
           tableData={data.reunions}
+          projectId ={match.params.id}
           />
         <TreeTable 
           title={"Liste des taches"} 
