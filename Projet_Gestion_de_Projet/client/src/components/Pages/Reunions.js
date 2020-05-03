@@ -23,6 +23,8 @@ query taches($portfolioId: ID!) {
     _id
       name
       description
+      dateDebut
+      dateFin
     }
 }
 `;

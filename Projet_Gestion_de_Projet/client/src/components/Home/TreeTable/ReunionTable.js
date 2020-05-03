@@ -53,7 +53,7 @@ export const ReunionTable = ({ tableData,projectId} = []) => {
     return (
         <div className={classes.allWidth}>
         <MaterialTable
-            title={"Listes des reunions"}
+            title={"Liste des reunions"}
             icons={tableIcons}
             data={state.data}
             editable={{
