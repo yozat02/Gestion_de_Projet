@@ -21,12 +21,24 @@ const tachesResolvers = {
                 return taches;
                 }
         },
-
         tache: async (parent, { tacheId }) => {
            let projet = await Projet.findOne({ taches: { $elemMatch: { _id: mongoose.Types.ObjectId(tacheId) } } });
             let taches = Array.from(projet.taches);
            return taches.find(e => e._id.toString() === tacheId);
-         }
+         },
+         tacheByReunionId :async (parent ,{reunionId}) => {
+             let taches = [] ;
+            let projet = await Projet.findOne({ reunions: { $elemMatch: { _id: mongoose.Types.ObjectId(reunionId) } } });
+            let reunions = Array.from(projet.reunions);
+            let reunion =reunions.find(e => e._id.toString() === reunionId);
+            if(reunion.taches){
+                let list = reunion.taches
+                projet.taches.map(tache => {
+                    if(list.includes(tache._id.toString())){taches.push(tache)}
+                })
+            }
+            return taches ;
+         },
     },
     Mutation: {
         createTache: async (root, { input }) => {

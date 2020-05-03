@@ -8,7 +8,7 @@ const query = gql`
         # Taches
         taches(portfolioId: ID): [Tache]
          tache(tacheId: ID!): Tache
-        
+         tacheByReunionId(reunionId :ID!) : [Tache]
         # Developpeurs
         developpeurs: [Developpeur]
         developpeur(developpeurId: String!): Developpeur
