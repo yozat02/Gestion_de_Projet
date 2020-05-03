@@ -53,6 +53,7 @@ const tachesResolvers = {
             let reunions = Array.from(projet.reunions);
             let reunion =reunions.find(e => e._id.toString() === input.reunionId);
             if (!projet.taches) projet['taches'] = [];
+            if (!reunion.taches) reunion['taches'] = [];
             reunion.taches.push(tache._id.toString())
             projet.taches.push(tache);
             await projet.save();
