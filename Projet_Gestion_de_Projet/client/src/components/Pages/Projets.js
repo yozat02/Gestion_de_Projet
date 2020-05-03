@@ -1,6 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {TreeTable} from "../Home/TreeTable/TreeTable";
+import {ReunionTable} from "../Home/TreeTable/ReunionTable";
+
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
@@ -22,6 +24,12 @@ query taches($portfolioId: ID!) {
   projet(projetId: $portfolioId){
     name
     description
+  }
+  reunions(projetId: $portfolioId) {
+    _id
+    name 
+    description
+    date
   }
 }
 `;
@@ -118,6 +126,9 @@ export const CheckupsProjetsPage = ({match}) => {
             </CardContent>
           </CardActionArea>
         </Card>
+        <ReunionTable  
+          tableData={data.reunions}
+          />
         <TreeTable 
           title={"Liste des taches"} 
           columns={columns} 
