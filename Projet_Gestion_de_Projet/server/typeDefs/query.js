@@ -15,6 +15,10 @@ const query = gql`
         developpeurs: [Developpeur]
         developpeur(developpeurId: String!): Developpeur
         developpeurByTacheId(tacheId: ID!) :[Developpeur]
+
+        #Reunions
+        reunions:(portfolioId : ID) :[Reunion]
+        reunion :(reunionId : ID!) : Reunion
     } 
 `;
 

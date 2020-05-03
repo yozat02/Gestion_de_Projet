@@ -5,7 +5,7 @@ const projetType = gql`
         name: String
         description: String
         taches: [Tache]
-        reunion :[Reunion]
+        reunions :[Reunion]
         developpeurs: [String]
     }
     input ProjetInput {
