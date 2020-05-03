@@ -1,5 +1,4 @@
 const { gql } = require('apollo-server-express');
-
 const query = gql`
     type Query { 
         # Projets
@@ -14,9 +13,9 @@ const query = gql`
         developpeurs: [Developpeur]
         developpeur(developpeurId: String!): Developpeur
         developpeurByTacheId(tacheId: ID!) :[Developpeur]
-        #Reunions
-       # reunions:(portfolioId: ID): [Reunion]
-        #reunion :(reunionId: ID!): Reunion
+        reunions(projetId: ID): [Reunion]
+        reunion(reunionId: ID!): Reunion
+
     } 
 `;
 
