@@ -1,20 +1,21 @@
 const { gql } = require('apollo-server-express');
-const projetType = gql`
-    type Projet {
+const reunionType = gql`
+    type Reunion {
         _id: ID
         name: String
         description: String
-        taches: [Tache]
-        reunion :[Reunion]
-        developpeurs: [String]
+        date : String
+        
     }
-    input ProjetInput {
+    input ReunionInput {
+        tacheId : ID
         projetId: ID
         name: String
         description: String
+        date : String
     }
 `;
 
 module.exports = {
-    projetType
+    reunionType
 }

@@ -47,7 +47,9 @@ const [updateProjet] = useMutation(UPDATE_PROJET);
           input: {"name": name ,"description" :description },
           refetchQueries: [{ query: PROJETS }],
       }
+    
   });
+  window.location.reload(false) ;
   }
   const updateItem = (item) => {
     updateProjet({
@@ -56,9 +58,10 @@ const [updateProjet] = useMutation(UPDATE_PROJET);
           refetchQueries: [{ query: PROJETS }],
       }
      });
+     
   }
   const deleteItem = (item) => {
-    
+
   }
   
   if (loading) return <p>Loading...</p>;
