@@ -8,7 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-
+import { Gant } from './gant'
 
 const TACHES = gql`
 query taches($portfolioId: ID!) {
@@ -127,6 +127,7 @@ export const CheckupsProjetsPage = ({match}) => {
           updateItem={updateItem}
           rowClick={true}
           />
+        <Gant data={data.tacheByReunionId} />
       </div>
     
   );
