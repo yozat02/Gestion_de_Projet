@@ -10,6 +10,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import { Gant } from './gant'
 
 
 const TACHES = gql`
@@ -23,6 +24,11 @@ query taches($portfolioId: ID!) {
     name 
     description
     date
+  }
+  taches(portfolioId :$portfolioId){
+    name
+    dateDebut
+    dateFin
   }
 }
 `;
@@ -65,6 +71,7 @@ export const CheckupsProjetsPage = ({match}) => {
           tableData={!!data.reunions ? data.reunions :[]}
           projectId ={match.params.id}
           />
+        <Gant data={data.taches} />
        
       </div>
     
