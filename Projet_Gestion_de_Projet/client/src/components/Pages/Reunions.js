@@ -74,10 +74,10 @@ export const CheckupsProjetsPage = ({match}) => {
   const [addTache] = useMutation(ADD_TACHE);
   const [deleteTache] =useMutation(DELETE_TACHE);
   const [updateTache] =useMutation(UPDATE_TACHE);
-  const addItem = (name,description,dateDebut,dateFin) => {
+  const addItem = (item) => {
     addTache({
       variables: {
-          input: {"projetId":data.reunion.parent,"reunionId":match.params.id,"name": name ,"description" :description,"dateDebut":dateDebut,"dateFin":dateFin },
+          input: {"projetId":data.reunion.parent,"reunionId":match.params.id,"name": item.name ,"description" :item.description,"dateDebut":item.dateDebut,"dateFin":item.dateFin },
           refetchQueries: [{ query: TACHES }],
       }
      });

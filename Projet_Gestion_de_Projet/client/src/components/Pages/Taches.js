@@ -57,10 +57,10 @@ const CheckupsTachesPage = ({match}) => {
   const [addDev] = useMutation(ADD_DEVELOPPEUR);
   const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
 
-  const addItem = (name) => {
+  const addItem = (item) => {
     addDev({
       variables: {
-          input: {"tacheId":match.params.id,"name": name },
+          input: {"tacheId":match.params.id,"name": item.name },
           refetchQueries: [{ query: DEVELOPPEURS }],
       }
      });

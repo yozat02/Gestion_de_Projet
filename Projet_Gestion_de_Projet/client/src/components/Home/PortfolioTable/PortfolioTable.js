@@ -43,10 +43,10 @@ const { loading, error, data } = useQuery(PROJETS);
 const [addProjet] = useMutation(ADD_PROJET);
 const [updateProjet] = useMutation(UPDATE_PROJET);
 
-  const addItem = (name,description,responsable) => {
+  const addItem = (item) => {
     addProjet({
       variables: {
-          input: {"name": name ,"description" :description ,"responsable" :responsable},
+          input: {"name": item.name ,"description" :item.description ,"responsable" :item.responsable},
           refetchQueries: [{ query: PROJETS }],
       }
     
