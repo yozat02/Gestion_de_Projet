@@ -66,8 +66,8 @@ export const CheckupsProjetsPage = ({match}) => {
   const  columns= [
     { title: 'Nom', field: 'name' },
     { title: 'Description', field: 'description',width: 700 },
-    { title: 'Date de debut', field: 'dateDebut' },
-    { title: 'Date de fin', field: 'dateFin'}
+    { title: 'Date de debut', field: 'dateDebut',type: 'date',},
+    { title: 'Date de fin', field: 'dateFin',type: 'date',}
     
   ]
   let { loading, error, data } = useQuery(TACHES,{ variables: {portfolioId: match.params.id},});

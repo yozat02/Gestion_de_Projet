@@ -32,7 +32,7 @@ export const ReunionTable = ({ tableData,projectId} = []) => {
       const  columns= [
         { title: 'Nom', field: 'name' },
         { title: 'Description', field: 'description',width: 700 },
-        { title: 'Date', field: 'date' },  
+        { title: 'Date', field: 'date',type: 'date'},  
       ]
 
       const history = useHistory();
