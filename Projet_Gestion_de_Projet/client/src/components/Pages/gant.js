@@ -4,7 +4,8 @@ import "./style.css";
 
 export const Gant = ({data=[]}) => {
     let list = []
-    data.map(e => {
+    if(data){
+      data.map(e => {
         list.push({
             id : e._id ,
             name : e.name,
@@ -12,6 +13,7 @@ export const Gant = ({data=[]}) => {
             end :e.dateFin
         })
     })
+    }
         // let data = [
         // {
         //     id: 1,

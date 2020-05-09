@@ -81,6 +81,7 @@ export const CheckupsProjetsPage = ({match}) => {
           refetchQueries: [{ query: TACHES }],
       }
      });
+     window.location.reload(false) ;
   }
   const updateItem = (item) => {
     updateTache({

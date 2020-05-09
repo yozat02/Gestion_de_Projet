@@ -11,6 +11,7 @@ export const PROJETS = gql`
     _id
     name
     description
+    responsable
   }
 }
 `;
@@ -35,16 +36,17 @@ export const PortfolioTable = () => {
 const  columns= [
   { title: 'Nom', field: 'name' },
   { title: 'Description', field: 'description' },
+  { title: 'Responsable', field: 'responsable' },
 ]
   
 const { loading, error, data } = useQuery(PROJETS);
 const [addProjet] = useMutation(ADD_PROJET);
 const [updateProjet] = useMutation(UPDATE_PROJET);
 
-  const addItem = (name,description) => {
+  const addItem = (name,description,responsable) => {
     addProjet({
       variables: {
-          input: {"name": name ,"description" :description },
+          input: {"name": name ,"description" :description ,"responsable" :responsable},
           refetchQueries: [{ query: PROJETS }],
       }
     
@@ -54,7 +56,7 @@ const [updateProjet] = useMutation(UPDATE_PROJET);
   const updateItem = (item) => {
     updateProjet({
       variables: {
-        input: {"projetId":item._id,"name": item.name ,"description" :item.description },
+        input: {"projetId":item._id,"name": item.name ,"description" :item.description ,"responsable" :item.responsable},
           refetchQueries: [{ query: PROJETS }],
       }
      });

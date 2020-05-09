@@ -8,12 +8,12 @@ const projetsResolvers = {
 
     },
     Mutation: {
-        createProjet: async (root, { input }) => await new Projet({ name: input.name, description: input.description }).save(),
+        createProjet: async (root, { input }) => await new Projet({ name: input.name, description: input.description ,responsable :input.responsable }).save(),
         // Update Project
-        updateProjet: async (obj, { input: { projetId, name, description } }) => {
+        updateProjet: async (obj, { input: { projetId, name, description,responsable } }) => {
             try {
                 const options = { new: true };
-                return await Projet.findByIdAndUpdate(projetId, { name, description }, options)
+                return await Projet.findByIdAndUpdate(projetId, { name, description,responsable }, options)
             } catch (error) {
                 throw new Error(error);
             }

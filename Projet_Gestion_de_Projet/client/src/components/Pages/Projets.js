@@ -18,6 +18,7 @@ query taches($portfolioId: ID!) {
   projet(projetId: $portfolioId){
     name
     description
+    responsable
   }
   reunions(projetId: $portfolioId) {
     _id
@@ -64,6 +65,9 @@ export const CheckupsProjetsPage = ({match}) => {
               <Typography variant="body2" color="textSecondary" component="p">
                <h2>Description : {data.projet.description}</h2> 
               </Typography>
+              {!!data.projet.responsable && <Typography variant="body2" color="textSecondary" component="p">
+               <h2>Responsable : {data.projet.responsable}</h2> 
+              </Typography>}
             </CardContent>
           </CardActionArea>
         </Card>

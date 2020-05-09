@@ -4,6 +4,7 @@ const projetType = gql`
         _id: ID
         name: String
         description: String
+        responsable :String
         taches: [Tache]
         reunions :[Reunion]
         developpeurs: [String]
@@ -12,6 +13,7 @@ const projetType = gql`
         projetId: ID
         name: String
         description: String
+        responsable : String
     }
 `;
 

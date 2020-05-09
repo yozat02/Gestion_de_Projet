@@ -12,6 +12,9 @@ const projetSchema = new Schema({
     description: {
         type: String
     },
+    responsable: {
+        type: String
+    },
     taches: {
         type: Array,
         default: undefined
