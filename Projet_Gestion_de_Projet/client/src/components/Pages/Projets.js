@@ -2,7 +2,12 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {TreeTable} from "../Home/TreeTable/TreeTable";
 import {ReunionTable} from "../Home/TreeTable/ReunionTable";
-
+import {
+  Grid,
+  Paper,
+} from '@material-ui/core';
+import Block from '../Commons/Block/Block'
+import clsx from 'clsx';
 import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { useMutation } from '@apollo/react-hooks';
@@ -11,7 +16,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Gant } from './gant'
-
+import { ListTache } from './ListTache'
 
 const TACHES = gql`
 query taches($portfolioId: ID!) {
@@ -28,6 +33,7 @@ query taches($portfolioId: ID!) {
   }
   taches(portfolioId :$portfolioId){
     name
+    description
     dateDebut
     dateFin
   }
@@ -39,11 +45,22 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginBottom: "20px"
   },
+  paper: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column'
+},
+  fixedHeight: {
+      height: 240,
+      marginBottom: "20px",
+  },
 
 }));
 
 export const CheckupsProjetsPage = ({match}) => {
   const classes = useStyles(); 
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   let { loading, error, data } = useQuery(TACHES,{ variables: {portfolioId: match.params.id},});
   
   if (loading) return <p>Loading...</p>;
@@ -71,6 +88,26 @@ export const CheckupsProjetsPage = ({match}) => {
             </CardContent>
           </CardActionArea>
         </Card>
+        { !!data.taches &&  <Grid container spacing={3}>
+        <Grid item xs={12} md={4} lg={4}>
+                <Paper className={fixedHeightPaper}>
+                    <Block>Les taches terminées</Block>
+                    <ListTache taches={data.taches} type={"1"} />
+                </Paper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={4}>
+                <Paper className={fixedHeightPaper}>
+                    <Block>Les taches à faire</Block>
+                    <ListTache taches={data.taches} type={"2"} />
+                </Paper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={4}>
+                <Paper className={fixedHeightPaper}>
+                    <Block>Les taches en cours</Block>
+                    <ListTache taches={data.taches} type={"3"} />
+                </Paper>
+            </Grid>
+        </Grid>}
         <ReunionTable  
           tableData={!!data.reunions ? data.reunions :[]}
           projectId ={match.params.id}
