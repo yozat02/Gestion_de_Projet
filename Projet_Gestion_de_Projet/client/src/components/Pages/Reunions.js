@@ -9,7 +9,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Gant } from './gant'
-
+import {Status} from './Status'
 const TACHES = gql`
 query taches($portfolioId: ID!) {
   reunion(reunionId: $portfolioId){
@@ -22,6 +22,7 @@ query taches($portfolioId: ID!) {
   tacheByReunionId(reunionId:$portfolioId){
     _id
       name
+      status
       description
       dateDebut
       dateFin
@@ -63,9 +64,15 @@ const useStyles = makeStyles((theme) => ({
 
 export const CheckupsProjetsPage = ({match}) => {
   const classes = useStyles(); 
+  const status = {
+    open : "Open",
+    inProgress: "In Progress" ,
+    resolved : "Resolved"
+  }
   const  columns= [
     { title: 'Nom', field: 'name' },
-    { title: 'Description', field: 'description',width: 700 },
+    { title: 'Status', field: 'status',lookup: status,render: (item) => <Status item={item} /> },
+    { title: 'Description', field: 'description',width: 600 },
     { title: 'Date de debut', field: 'dateDebut',type: 'date',},
     { title: 'Date de fin', field: 'dateFin',type: 'date',}
     
@@ -77,7 +84,7 @@ export const CheckupsProjetsPage = ({match}) => {
   const addItem = (item) => {
     addTache({
       variables: {
-          input: {"projetId":data.reunion.parent,"reunionId":match.params.id,"name": item.name ,"description" :item.description,"dateDebut":item.dateDebut,"dateFin":item.dateFin },
+          input: {"projetId":data.reunion.parent,"reunionId":match.params.id,"name": item.name ,"description" :item.description,"dateDebut":item.dateDebut,"dateFin":item.dateFin,"status":item.status},
           refetchQueries: [{ query: TACHES }],
       }
      });
@@ -86,7 +93,7 @@ export const CheckupsProjetsPage = ({match}) => {
   const updateItem = (item) => {
     updateTache({
       variables: {
-        input: {"tacheId":item._id,"name": item.name ,"description" :item.description,"dateDebut":item.dateDebut,"dateFin":item.dateFin },
+        input: {"tacheId":item._id,"name": item.name ,"description" :item.description,"dateDebut":item.dateDebut,"dateFin":item.dateFin,"status":item.status },
           refetchQueries: [{ query: TACHES }],
       }
      });

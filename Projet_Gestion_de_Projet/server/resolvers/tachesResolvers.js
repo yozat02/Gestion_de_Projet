@@ -46,6 +46,7 @@ const tachesResolvers = {
                  _id: new mongoose.Types.ObjectId,
                  name: input.name,
                   description: input.description,
+                  status : input.status,
                   dateDebut :input.dateDebut,
                   dateFin :input.dateFin
                 }
@@ -61,7 +62,7 @@ const tachesResolvers = {
             return tache;
         },
         // update tache
-        updateTache: async (obj, { input: { tacheId, name, description,dateDebut,dateFin} }) => {
+        updateTache: async (obj, { input: { tacheId, name,status, description,dateDebut,dateFin} }) => {
             try {
                 let tache = null;
                 const filter = { taches: { $elemMatch: { _id: mongoose.Types.ObjectId(tacheId) } } };
@@ -69,7 +70,9 @@ const tachesResolvers = {
                     "taches.$.name": name,
                     "taches.$.description": description,
                     "taches.$.dateDebut": dateDebut,
-                    "taches.$.dateFin": dateFin} 
+                    "taches.$.dateFin": dateFin,
+                    "taches.$.status": status
+                } 
                 };
                 const options = { new: true };
                 const query = await Projet.findOneAndUpdate(filter, update, options);

@@ -25,7 +25,7 @@ const developpeursResolvers = {
         createDeveloppeur: async (root, { input }) => {
 
             // create developpeur
-            const developpeur = new Developpeur({ _id: new mongoose.Types.ObjectId, name: input.name});
+            const developpeur = new Developpeur({ _id: new mongoose.Types.ObjectId, name: input.name, mail : input.mail});
             const developpeurId = developpeur._id.toString()
             await developpeur.save();
 
@@ -42,9 +42,9 @@ const developpeursResolvers = {
 
         },
         // Update developpeur
-        updateDeveloppeur: async (obj, { input: { developpeurId, name} }) => {
+        updateDeveloppeur: async (obj, { input: { developpeurId, name,mail} }) => {
             try {
-                return await Developpeur.findByIdAndUpdate(developpeurId, { name}, { new: true })
+                return await Developpeur.findByIdAndUpdate(developpeurId, { name,mail}, { new: true })
             } catch (error) {
                 throw new Error(error);
             }

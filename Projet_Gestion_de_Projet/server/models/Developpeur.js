@@ -3,7 +3,8 @@ const { Schema } = mongoose;
 
 const developpeurSchema = new Schema({
     _id: Schema.ObjectId,
-    name: String
+    name: String,
+    mail : String
 },
 {
     versionKey: false

@@ -20,6 +20,7 @@ query developpeurByTacheId($tacheId: ID!) {
   developpeurByTacheId(tacheId: $tacheId) {
     _id
     name 
+    mail
   }
   
 }
@@ -51,6 +52,7 @@ const CheckupsTachesPage = ({match}) => {
   const classes = useStyles();
   const  columns= [
     { title: 'Nom', field: 'name' },
+    { title: 'Mail', field: 'mail' },
   ]
  
   let { loading, error, data } = useQuery(DEVELOPPEURS,{ variables: {tacheId: match.params.id},});
@@ -60,7 +62,7 @@ const CheckupsTachesPage = ({match}) => {
   const addItem = (item) => {
     addDev({
       variables: {
-          input: {"tacheId":match.params.id,"name": item.name },
+          input: {"tacheId":match.params.id,"name": item.name,"mail":item.mail },
           refetchQueries: [{ query: DEVELOPPEURS }],
       }
      });
@@ -68,7 +70,7 @@ const CheckupsTachesPage = ({match}) => {
   const updateItem = (item) => {
     updateDeveloppeur({
       variables: {
-        input: {"developpeurId":item._id,"name": item.name},
+        input: {"developpeurId":item._id,"name": item.name,"mail":item.mail },
           refetchQueries: [{ query: DEVELOPPEURS}],
       }
      });
