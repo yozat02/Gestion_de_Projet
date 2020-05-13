@@ -125,6 +125,26 @@ export const CheckupsProjetsPage = ({match}) => {
         );
       })
     }
+    if(item.status=='resolved'){
+      const tacheDev = devs.filter(dev => item.developpeurs.includes(dev._id))
+      console.log(tacheDev)
+      tacheDev.map(dev =>{
+        let templateParams = {
+          "email":dev.mail ,
+          "InProgress": "Resolved",
+          "NomTache": item.name,
+          "nameDev": dev.name,
+          "DateBebut": item.dateDebut,
+          "DateFin": item.dateFin
+        };
+        emailjs.send(
+          "gmail",
+          "new_tache",
+          templateParams,
+          "user_m0dZRWFvydtF288BRlmnD"
+        );
+      })
+    }
   }
   const deleteItem = (item) => {
     deleteTache({
