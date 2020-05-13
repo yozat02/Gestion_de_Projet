@@ -8,6 +8,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import * as emailjs from "emailjs-com";
 
 const DEVELOPPEURS = gql`
 query developpeurByTacheId($tacheId: ID!) {
@@ -59,13 +60,28 @@ const CheckupsTachesPage = ({match}) => {
   const [addDev] = useMutation(ADD_DEVELOPPEUR);
   const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
 
-  const addItem = (item) => {
+  const addItem = (item,tache=data.tache) => {
     addDev({
       variables: {
           input: {"tacheId":match.params.id,"name": item.name,"mail":item.mail },
           refetchQueries: [{ query: DEVELOPPEURS }],
       }
      });
+     let templateParams = {
+      "email":item.mail ,
+      "InProgress": "",
+      "NomTache": tache.name,
+      "nameDev": item.name,
+      "DateBebut": tache.dateDebut,
+      "DateFin": tache.dateFin
+    };
+    emailjs.send(
+      "gmail",
+      "new_tache",
+      templateParams,
+      "user_m0dZRWFvydtF288BRlmnD"
+    );
+    console.log(templateParams)
   }
   const updateItem = (item) => {
     updateDeveloppeur({
