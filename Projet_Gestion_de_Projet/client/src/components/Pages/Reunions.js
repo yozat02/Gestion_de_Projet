@@ -118,7 +118,7 @@ export const CheckupsProjetsPage = ({match}) => {
           "DateFin": item.dateFin
         };
         emailjs.send(
-          "gmail",
+          "default_service",
           "new_tache",
           templateParams,
           "user_m0dZRWFvydtF288BRlmnD"
@@ -138,7 +138,7 @@ export const CheckupsProjetsPage = ({match}) => {
           "DateFin": item.dateFin
         };
         emailjs.send(
-          "gmail",
+          "default_service",
           "new_tache",
           templateParams,
           "user_m0dZRWFvydtF288BRlmnD"

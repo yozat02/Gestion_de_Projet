@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import {TreeTable} from '../TreeTable/TreeTable';
 import { useMutation } from '@apollo/react-hooks';
+import * as emailjs from "emailjs-com";
 
 
 export const PROJETS = gql`
@@ -12,6 +13,15 @@ export const PROJETS = gql`
     name
     description
     responsable
+  }
+  developpeurs{
+    _id
+    name 
+    mail
+    tacheName
+    tacheDateDebut
+    tacheDateFin
+    tacheStatus
   }
 }
 `;
@@ -30,7 +40,13 @@ const UPDATE_PROJET = gql`
     }
   }
 `;
-
+const UPDATE_DEVELOPPEUR = gql`
+  mutation updateDeveloppeur($input: DeveloppeurInput) {
+    updateDeveloppeur(input: $input){
+      name
+    }
+  }
+`;
 
 export const PortfolioTable = () => {
 const  columns= [
@@ -42,6 +58,8 @@ const  columns= [
 const { loading, error, data } = useQuery(PROJETS);
 const [addProjet] = useMutation(ADD_PROJET);
 const [updateProjet] = useMutation(UPDATE_PROJET);
+const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
+//console.log(data)
 
   const addItem = (item) => {
     addProjet({
@@ -65,7 +83,42 @@ const [updateProjet] = useMutation(UPDATE_PROJET);
   const deleteItem = (item) => {
 
   }
+  //Devs
   
+  if(data){
+    //console.log(data.developpeurs)
+    data.developpeurs.map(dev =>{
+      let date = new Date();
+      if(dev.tacheDateFin){
+        console.log(dev)
+        if(new Date(dev.tacheDateFin) < date && dev.tacheStatus == "true"){
+          console.log(dev)
+          let templateParams = {
+            "email":dev.mail ,
+            "InProgress": "est terminée",
+            "NomTache": dev.tacheName,
+            "nameDev": dev.name,
+            "DateBebut": dev.tacheDateDebut,
+            "DateFin": dev.tacheDateFin
+          };
+          emailjs.send(
+            "default_service",
+            "new_tache",
+            templateParams,
+            "user_m0dZRWFvydtF288BRlmnD"
+          );
+          updateDeveloppeur({
+            variables: {
+              input: {"developpeurId":dev._id,"name": dev.name,"mail":dev.mail,"tacheStatus":"false" },
+               
+            }
+           });
+        }
+      }
+    })
+  }
+
+  //Devs
   if (loading) return <p>Loading...</p>;
   
     return (

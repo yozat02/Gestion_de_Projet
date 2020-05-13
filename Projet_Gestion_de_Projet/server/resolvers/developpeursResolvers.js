@@ -51,9 +51,9 @@ const developpeursResolvers = {
 
         },
         // Update developpeur
-        updateDeveloppeur: async (obj, { input: { developpeurId, name,mail} }) => {
+        updateDeveloppeur: async (obj, { input: { developpeurId, name,mail,tacheStatus} }) => {
             try {
-                return await Developpeur.findByIdAndUpdate(developpeurId, { name,mail}, { new: true })
+                return await Developpeur.findByIdAndUpdate(developpeurId, { name,mail,tacheStatus}, { new: true })
             } catch (error) {
                 throw new Error(error);
             }

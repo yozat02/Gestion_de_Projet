@@ -77,7 +77,7 @@ const CheckupsTachesPage = ({match}) => {
       "DateFin": tache.dateFin
     };
     emailjs.send(
-      "gmail",
+      "default_service",
       "new_tache",
       templateParams,
       "user_m0dZRWFvydtF288BRlmnD"
@@ -87,7 +87,7 @@ const CheckupsTachesPage = ({match}) => {
   const updateItem = (item) => {
     updateDeveloppeur({
       variables: {
-        input: {"developpeurId":item._id,"name": item.name,"mail":item.mail },
+        input: {"developpeurId":item._id,"name": item.name,"mail":item.mail ,"tacheStatus":"true"},
           refetchQueries: [{ query: DEVELOPPEURS}],
       }
      });
