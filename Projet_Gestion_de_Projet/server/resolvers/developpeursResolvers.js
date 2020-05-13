@@ -25,7 +25,16 @@ const developpeursResolvers = {
         createDeveloppeur: async (root, { input }) => {
 
             // create developpeur
-            const developpeur = new Developpeur({ _id: new mongoose.Types.ObjectId, name: input.name, mail : input.mail});
+            const developpeur = new Developpeur({ 
+                _id: new mongoose.Types.ObjectId, 
+                name:input.name, 
+                mail :input.mail,
+                tacheName:input.tacheName,
+                tacheDateDebut:input.tacheDateDebut,
+                tacheDateFin:input.tacheDateFin,
+                tacheStatus:input.tacheStatus,
+
+            });
             const developpeurId = developpeur._id.toString()
             await developpeur.save();
 

@@ -63,7 +63,8 @@ const CheckupsTachesPage = ({match}) => {
   const addItem = (item,tache=data.tache) => {
     addDev({
       variables: {
-          input: {"tacheId":match.params.id,"name": item.name,"mail":item.mail },
+          input: {"tacheId":match.params.id,"name": item.name,"mail":item.mail,"tacheName":tache.name,"tacheDateDebut":tache.dateDebut,
+        "tacheDateFin":tache.dateFin,"tacheStatus":"true" },
           refetchQueries: [{ query: DEVELOPPEURS }],
       }
      });
