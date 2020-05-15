@@ -84,13 +84,21 @@ const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
 
   }
   //Devs
-  
+  const updateDev = (dev) => {
+    updateDeveloppeur({
+      variables: {
+        input: {"developpeurId":dev._id,"name": dev.name,"mail":dev.mail,"tacheStatus":"false" },
+         
+      }
+     });
+     
+  }
   if(data){
     //console.log(data.developpeurs)
     data.developpeurs.map(dev =>{
       let date = new Date();
       if(dev.tacheDateFin){
-        console.log(dev)
+       // console.log(dev)
         if(new Date(dev.tacheDateFin) < date && dev.tacheStatus == "true"){
           console.log(dev)
           let templateParams = {
@@ -103,16 +111,11 @@ const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
           };
           emailjs.send(
             "default_service",
-            "new_tache",
+            "fin_tache",
             templateParams,
             "user_m0dZRWFvydtF288BRlmnD"
           );
-          updateDeveloppeur({
-            variables: {
-              input: {"developpeurId":dev._id,"name": dev.name,"mail":dev.mail,"tacheStatus":"false" },
-               
-            }
-           });
+          updateDev(dev);
         }
       }
     })

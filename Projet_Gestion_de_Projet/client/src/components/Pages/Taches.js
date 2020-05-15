@@ -17,6 +17,8 @@ query developpeurByTacheId($tacheId: ID!) {
     description
     dateDebut
     dateFin
+    parent
+    projetName
   }
   developpeurByTacheId(tacheId: $tacheId) {
     _id
@@ -55,11 +57,10 @@ const CheckupsTachesPage = ({match}) => {
     { title: 'Nom', field: 'name' },
     { title: 'Mail', field: 'mail' },
   ]
- 
   let { loading, error, data } = useQuery(DEVELOPPEURS,{ variables: {tacheId: match.params.id},});
   const [addDev] = useMutation(ADD_DEVELOPPEUR);
   const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
-
+ 
   const addItem = (item,tache=data.tache) => {
     addDev({
       variables: {
@@ -74,11 +75,12 @@ const CheckupsTachesPage = ({match}) => {
       "NomTache": tache.name,
       "nameDev": item.name,
       "DateBebut": tache.dateDebut,
-      "DateFin": tache.dateFin
+      "DateFin": tache.dateFin,
+      "projet": tache.projetName
     };
     emailjs.send(
       "default_service",
-      "new_tache",
+      "dev",
       templateParams,
       "user_m0dZRWFvydtF288BRlmnD"
     );

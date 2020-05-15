@@ -42,19 +42,22 @@ const tachesResolvers = {
     },
     Mutation: {
         createTache: async (root, { input }) => {
-            let tache = {
-                 _id: new mongoose.Types.ObjectId,
-                 name: input.name,
-                  description: input.description,
-                  status : input.status,
-                  dateDebut :input.dateDebut,
-                  dateFin :input.dateFin
-                }
+            
             let projet = await Projet.findOne({ reunions: { $elemMatch: { _id: mongoose.Types.ObjectId(input.reunionId) } } });
             let reunions = Array.from(projet.reunions);
             let reunion =reunions.find(e => e._id.toString() === input.reunionId);
             if (!projet.taches) projet['taches'] = [];
             if (!reunion.taches) reunion['taches'] = [];
+            let tache = {
+                _id: new mongoose.Types.ObjectId,
+                name: input.name,
+                 description: input.description,
+                 status : input.status,
+                 dateDebut :input.dateDebut,
+                 dateFin :input.dateFin,
+                 parent :input.parent,
+                 projetName :projet.name
+               }
             reunion.taches.push(tache._id.toString())
             projet.taches.push(tache);
             await projet.save();

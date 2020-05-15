@@ -92,7 +92,8 @@ export const CheckupsProjetsPage = ({match}) => {
   const addItem = (item) => {
     addTache({
       variables: {
-          input: {"projetId":data.reunion.parent,"reunionId":match.params.id,"name": item.name ,"description" :item.description,"dateDebut":item.dateDebut,"dateFin":item.dateFin,"status":item.status},
+          input: {"projetId":data.reunion.parent,"reunionId":match.params.id,"name": item.name ,"description" :item.description,"dateDebut":item.dateDebut,"dateFin":item.dateFin,"status":item.status,
+        "parent":data.reunion.parent},
           refetchQueries: [{ query: TACHES }],
       }
      });
@@ -119,7 +120,7 @@ export const CheckupsProjetsPage = ({match}) => {
         };
         emailjs.send(
           "default_service",
-          "new_tache",
+          "status",
           templateParams,
           "user_m0dZRWFvydtF288BRlmnD"
         );
@@ -139,7 +140,7 @@ export const CheckupsProjetsPage = ({match}) => {
         };
         emailjs.send(
           "default_service",
-          "new_tache",
+          "status",
           templateParams,
           "user_m0dZRWFvydtF288BRlmnD"
         );

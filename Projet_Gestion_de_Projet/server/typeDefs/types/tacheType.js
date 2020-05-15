@@ -8,6 +8,8 @@ const tacheType = gql`
         description: String
         developpeurs: [String]
         status : String
+        parent : String
+        projetName : String
     }
     input TacheInput {
         tacheId : ID
@@ -18,6 +20,7 @@ const tacheType = gql`
         dateDebut : String
         dateFin : String
         status : String
+        parent : String
     }
 `;
 
