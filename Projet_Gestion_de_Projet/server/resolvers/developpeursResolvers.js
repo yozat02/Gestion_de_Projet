@@ -58,6 +58,7 @@ const developpeursResolvers = {
                 throw new Error(error);
             }
         },
+        
     },
 };
 

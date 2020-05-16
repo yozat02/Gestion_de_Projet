@@ -1,5 +1,5 @@
 {
-  "name": "isc-dashboard-v2",
+  "name": "projet-pfa",
   "version": "1.0.0",
   "description": "1. Follow instructions on Docker Section to set up the environment.\r 2. Follow instructions on Server Section to set up the server.\r 3. Follow instructions on Client Section to set up the client.\r 4. Run dev script from root directory with npm to launch server and client at same time :",
   "main": "index.js",

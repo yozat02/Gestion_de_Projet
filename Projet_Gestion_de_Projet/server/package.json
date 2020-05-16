@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "pfa",
   "dependencies": {
     "apollo-server-express": "^2.11.0",
     "body-parser": "^1.19.0",
