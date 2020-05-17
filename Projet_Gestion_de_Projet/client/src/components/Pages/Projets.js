@@ -40,6 +40,12 @@ query taches($portfolioId: ID!) {
   }
 }
 `;
+const DELETE_REUNION = gql`
+mutation deleteReunion($id: ID!) {
+  deleteReunion(id: $id) 
+}
+`;
+
 
 const useStyles = makeStyles((theme) => ({
   allWidth: {
@@ -63,7 +69,15 @@ export const CheckupsProjetsPage = ({match}) => {
   const classes = useStyles(); 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
   let { loading, error, data } = useQuery(TACHES,{ variables: {portfolioId: match.params.id},});
-  
+  const [deleteReunion] =useMutation(DELETE_REUNION);
+  const deleteItem = (item) => {
+    deleteReunion({
+      variables: {
+          id: item._id,
+      }
+     });
+  }
+
   if (loading) return <p>Loading...</p>;
 
   
@@ -112,6 +126,7 @@ export const CheckupsProjetsPage = ({match}) => {
         <ReunionTable  
           tableData={!!data.reunions ? data.reunions :[]}
           projectId ={match.params.id}
+          deleteItem={deleteItem}
           />
         <Gant data={data.taches} />
        

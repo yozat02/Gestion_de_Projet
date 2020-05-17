@@ -40,6 +40,27 @@ const reunionsResolvers = {
             await projet.save();
             return reunion;
         },
+        deleteReunion: async (obj, { id }) => {
+            try {
+               
+                let isReunionSuccessfullyDeleted = false;
+            
+                const filter = { reunions: { $elemMatch: { _id: mongoose.Types.ObjectId(id) } } };
+                const remove = { $pull: { reunions: { _id: mongoose.Types.ObjectId(id) } } };
+
+                let reunion;
+
+                const query = await Projet.findOneAndUpdate(filter, remove);
+                if (query && query.reunions) {
+                    isReunionSuccessfullyDeleted = true;
+                    reunion = query.reunions.find(e => e._id.toString() === id);
+                }
+                
+                return isReunionSuccessfullyDeleted
+            } catch (error) {
+                throw new Error(error);
+            }
+        }
     },
 }
 

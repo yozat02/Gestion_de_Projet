@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
   
   }));
   
-export const ReunionTable = ({ tableData,projectId} = []) => {
+export const ReunionTable = ({ tableData,projectId,deleteItem} = []) => {
     const classes = useStyles(); 
 
     const [state, setState] = React.useState({
@@ -87,7 +87,7 @@ export const ReunionTable = ({ tableData,projectId} = []) => {
               new Promise((resolve) => {
                 setTimeout(() => {
                   resolve();
-                  //deleteItem(oldData);
+                  deleteItem(oldData);
                   setState((prevState) => {
                     const data = [...prevState.data];
                     data.splice(data.indexOf(oldData), 1);
