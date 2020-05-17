@@ -42,7 +42,11 @@ const UPDATE_DEVELOPPEUR = gql`
     }
   }
 `;
-
+const DELETE_DEVELOPPEUR = gql`
+mutation deleteDeveloppeur($id: ID!){
+  deleteDeveloppeur(id: $id) 
+}
+`;
 const useStyles = makeStyles((theme) => ({
   allWidth: {
     width: "100%",
@@ -60,6 +64,8 @@ const CheckupsTachesPage = ({match}) => {
   let { loading, error, data } = useQuery(DEVELOPPEURS,{ variables: {tacheId: match.params.id},});
   const [addDev] = useMutation(ADD_DEVELOPPEUR);
   const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
+  const [deleteDeveloppeur] = useMutation(DELETE_DEVELOPPEUR);
+
  
   const addItem = (item,tache=data.tache) => {
     addDev({
@@ -95,7 +101,11 @@ const CheckupsTachesPage = ({match}) => {
      });
   }
   const deleteItem = (item) => {
-    
+    deleteDeveloppeur({
+      variables: {
+        id : item._id
+      }
+    })
   }
   
   if (loading) return <p>Loading...</p>;

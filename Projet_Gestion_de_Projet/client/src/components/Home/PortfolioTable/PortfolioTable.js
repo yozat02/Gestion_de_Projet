@@ -47,6 +47,11 @@ const UPDATE_DEVELOPPEUR = gql`
     }
   }
 `;
+const DELETE_DEVELOPPEUR = gql`
+  mutation deleteProjet($id: ID!) {
+    deleteProjet(id: $id)
+  }
+`;
 
 export const PortfolioTable = () => {
 const  columns= [
@@ -59,6 +64,7 @@ const { loading, error, data } = useQuery(PROJETS);
 const [addProjet] = useMutation(ADD_PROJET);
 const [updateProjet] = useMutation(UPDATE_PROJET);
 const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
+const [deleteProjet] = useMutation(DELETE_DEVELOPPEUR);
 //console.log(data)
 
   const addItem = (item) => {
@@ -81,7 +87,12 @@ const [updateDeveloppeur] = useMutation(UPDATE_DEVELOPPEUR);
      
   }
   const deleteItem = (item) => {
-
+    deleteProjet({
+      variables: {
+        id: item._id,
+        refetchQueries: [{ query: PROJETS }],
+    }
+    })
   }
   //Devs
   const updateDev = (dev) => {

@@ -14,6 +14,7 @@ const mutation = gql`
         # Delete
          deleteTache(id :ID!) : Boolean
         deleteProjet(id : ID!): Boolean
+        deleteDeveloppeur(id : ID!) : Boolean
     } 
 `;
 

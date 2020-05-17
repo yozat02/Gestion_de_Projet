@@ -58,7 +58,29 @@ const developpeursResolvers = {
                 throw new Error(error);
             }
         },
-        
+        deleteDeveloppeur: async (obj, { id }) => {
+            let isDeveloppeurSuccessfullyDeleted = false;
+            let isProjectInProgramSuccessfullyDeleted = false;
+            
+            //Filter to remove Developpeur referenceDeveloppeurs
+            const filterProgramInPortfolio = { taches: { $elemMatch: { developpeurs: { $in: [id] } } } };
+            const removeProgramInPortfolio = { $pull: { "taches.$[].developpeurs": { $in: [id] } } }
+
+            //Delete Developpeur
+            const deleteDeveloppeur = await Developpeur.findByIdAndDelete(id);
+            if (deleteDeveloppeur) {
+                isDeveloppeurSuccessfullyDeleted = true;
+            }
+
+            // //Delete Developpeur reference from Developpeurs  
+            const deleteProjectProgramPortfolio = await Projet.findOneAndUpdate(filterProgramInPortfolio, removeProgramInPortfolio);
+            if (deleteProjectProgramPortfolio) {
+                isProjectInProgramSuccessfullyDeleted = true;
+            }
+
+            return isDeveloppeurSuccessfullyDeleted && isProjectInProgramSuccessfullyDeleted ;
+
+        },
     },
 };
 
