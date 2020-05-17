@@ -90,7 +90,8 @@ const CheckupsTachesPage = ({match}) => {
       templateParams,
       "user_m0dZRWFvydtF288BRlmnD"
     );
-    console.log(templateParams)
+    //console.log(templateParams)
+    setTimeout(function(){ window.location.reload(false) ; }, 2000);
   }
   const updateItem = (item) => {
     updateDeveloppeur({
