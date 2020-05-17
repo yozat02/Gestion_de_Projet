@@ -106,7 +106,7 @@ export const CheckupsProjetsPage = ({match}) => {
           refetchQueries: [{ query: TACHES }],
       }
      });
-    if(item.status=='inProgress'){
+    if(item.status=='inProgress' && item.developpeurs){
       const tacheDev = devs.filter(dev => item.developpeurs.includes(dev._id))
       console.log(tacheDev)
       tacheDev.map(dev =>{
@@ -126,7 +126,7 @@ export const CheckupsProjetsPage = ({match}) => {
         );
       })
     }
-    if(item.status=='resolved'){
+    if(item.status=='resolved' && item.developpeurs){
       const tacheDev = devs.filter(dev => item.developpeurs.includes(dev._id))
       console.log(tacheDev)
       tacheDev.map(dev =>{
@@ -170,7 +170,7 @@ export const CheckupsProjetsPage = ({match}) => {
                <h2>Description : {data.reunion.description}</h2> 
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-               <h2>Description : {data.reunion.date}</h2> 
+               <h2>Date : {data.reunion.date}</h2> 
               </Typography>
             </CardContent>
           </CardActionArea>
