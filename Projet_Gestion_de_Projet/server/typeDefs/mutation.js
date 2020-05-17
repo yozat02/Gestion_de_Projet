@@ -11,6 +11,7 @@ const mutation = gql`
         updateProjet(input :ProjetInput) : Projet
         updateTache(input :TacheInput) : Tache
         updateDeveloppeur(input :DeveloppeurInput) : Developpeur
+        updateReunion(input :ReunionInput):Reunion
         # Delete
          deleteTache(id :ID!) : Boolean
         deleteProjet(id : ID!): Boolean

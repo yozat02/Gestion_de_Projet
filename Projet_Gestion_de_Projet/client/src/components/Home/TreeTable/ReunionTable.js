@@ -15,6 +15,13 @@ const ADD_REUNION = gql`
         }
     }
 `;
+const UPDATE_REUNION = gql`
+  mutation updateReunion($input: ReunionInput) {
+    updateReunion(input: $input){
+      name
+    }
+  }
+`;
 const useStyles = makeStyles((theme) => ({
     allWidth: {
       width: "100%",
@@ -40,6 +47,8 @@ export const ReunionTable = ({ tableData,projectId,deleteItem} = []) => {
        history.push(`/checkup/Reunion/${id}`);
      }
    const [addReunion] = useMutation(ADD_REUNION);
+   const [updateReunion] = useMutation(UPDATE_REUNION);
+
 
    const addItem = (name,description,date) => {
     addReunion({
@@ -49,7 +58,13 @@ export const ReunionTable = ({ tableData,projectId,deleteItem} = []) => {
      });
      window.location.reload(false) ;
   }
-    
+  const updateItem = (item) => {
+    updateReunion({
+      variables: {
+        input: {"reunionId":item._id,"name": item.name ,"description" :item.description,"date":item.date},
+      }
+     });
+    }
     return (
         <div className={classes.allWidth}>
         <MaterialTable
@@ -73,7 +88,7 @@ export const ReunionTable = ({ tableData,projectId,deleteItem} = []) => {
               new Promise((resolve) => {
                 setTimeout(() => {
                   resolve();
-                 // updateItem(newData)
+                  updateItem(newData)
                   if (oldData) {
                     setState((prevState) => {
                       const data = [...prevState.data];

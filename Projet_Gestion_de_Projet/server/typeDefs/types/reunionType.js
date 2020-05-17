@@ -10,6 +10,7 @@ const reunionType = gql`
     }
     input ReunionInput {
         projetId: ID
+        reunionId :ID
         name: String
         description: String
         date : String

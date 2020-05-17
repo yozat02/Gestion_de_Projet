@@ -40,6 +40,27 @@ const reunionsResolvers = {
             await projet.save();
             return reunion;
         },
+        // update Reunion
+        updateReunion: async (obj, { input: { reunionId, name, description,date} }) => {
+            try {
+                let reunion = null;
+                const filter = { reunions: { $elemMatch: { _id: mongoose.Types.ObjectId(reunionId) } } };
+                const update = { $set: { 
+                    "reunions.$.name": name,
+                    "reunions.$.description": description,
+                    "reunions.$.date": date,
+                } 
+                };
+                const options = { new: true };
+                const query = await Projet.findOneAndUpdate(filter, update, options);
+                if (query && query.reunions) {
+                    reunions = query.reunions.find(e => e._id.toString() === reunionId);
+                }
+                return reunion;
+            } catch (error) {
+                throw new Error(error);
+            }
+        },
         deleteReunion: async (obj, { id }) => {
             try {
                
