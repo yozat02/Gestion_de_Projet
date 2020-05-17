@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 export const ListTache = ({taches,type}) => {
     let list = [] ;
     let date = new Date();
-    console.log(date ,new Date(taches[0].dateFin))
+    //console.log(date ,new Date(taches[0].dateFin))
     if(type==="1"){
         list = taches.filter(tache => new Date(tache.dateFin) < date ) ;
     }

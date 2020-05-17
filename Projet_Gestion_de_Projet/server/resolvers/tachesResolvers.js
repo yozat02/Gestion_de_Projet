@@ -114,8 +114,16 @@ const tachesResolvers = {
                 } else {
                     notFoundNestedDeveloppeurs = true
                 }
+                //Filter to remove Developpeur referenceDeveloppeurs
+                const filterProgramInPortfolio = { reunions: { $elemMatch: { taches: { $in: [id] } } } };
+                const removeProgramInPortfolio = { $pull: { "reunions.$[].taches": { $in: [id] } } }
+                // //Delete Developpeur reference from Developpeurs  
+                 const deleteProjectProgramPortfolio = await Projet.findOneAndUpdate(filterProgramInPortfolio, removeProgramInPortfolio);
+                if (deleteProjectProgramPortfolio) {
+                    isProjectInProgramSuccessfullyDeleted = true;
+                }
 
-                return isTacheSuccessfullyDeleted && (isDeveloppeursSuccessfullyDeleted || notFoundNestedDeveloppeurs);
+                return isTacheSuccessfullyDeleted && (isDeveloppeursSuccessfullyDeleted || notFoundNestedDeveloppeurs) && isProjectInProgramSuccessfullyDeleted;
             } catch (error) {
                 throw new Error(error);
             }

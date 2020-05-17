@@ -30,6 +30,7 @@ query taches($portfolioId: ID!) {
     name 
     description
     date
+    taches
   }
   taches(portfolioId :$portfolioId){
     name
@@ -88,7 +89,7 @@ export const CheckupsProjetsPage = ({match}) => {
             </CardContent>
           </CardActionArea>
         </Card>
-        { !!data.taches &&  <Grid container spacing={3}>
+        { !!data.taches && !(data.reunions.taches == []) &&  <Grid container spacing={3}>
         <Grid item xs={12} md={4} lg={4}>
                 <Paper className={fixedHeightPaper}>
                     <Block>Les taches terminées</Block>
